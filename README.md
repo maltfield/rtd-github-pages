@@ -11,6 +11,12 @@ For more information, see this article:
 
  * https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/
 
+# Demo
+
+The GitHub-Pages-hosted "Hello World" example site built by this repo can be viewed here:
+
+ * https://maltfield.github.io/rtd-github-pages/
+
 # License
 
 The contents of this repo are dual-licensed. All code is GPLv3 and all other content is CC-BY-SA.
