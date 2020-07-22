@@ -31,6 +31,8 @@ export SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)
  
 # make a new temp dir which will be our GitHub Pages docroot
 docroot=`mktemp -d`
+
+export REPO_NAME="${GITHUB_REPOSITORY##*/}"
  
 ##############
 # BUILD DOCS #
@@ -113,10 +115,10 @@ cat > index.html <<EOF
 <html>
    <head>
       <title>helloWorld Docs</title>
-      <meta http-equiv = "refresh" content="0; url='${GITHUB_REPOSITORY##*/}/en/master/'" />
+      <meta http-equiv = "refresh" content="0; url='/${REPO_NAME}/en/master/'" />
    </head>
    <body>
-      <p>Please wait while you're redirected to our <a href="/en/master/${GITHUB_REPOSITORY##*/}">documentation</a>.</p>
+      <p>Please wait while you're redirected to our <a href="/${REPO_NAME}/en/master/">documentation</a>.</p>
    </body>
 </html>
 EOF
