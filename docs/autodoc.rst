@@ -1,6 +1,6 @@
 .. _autodoc:
  
-.. contents::
+#.. contents::
  
 helloWorld.py
 =============
