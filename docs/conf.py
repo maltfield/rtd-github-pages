@@ -223,7 +223,7 @@ html_context['current_version'] = current_version
 html_context['version'] = current_version
  
 # POPULATE LINKS TO OTHER LANGUAGES
-html_context['languages'] = list()
+html_context['languages'] = ['en']
  
 languages = [lang.name for lang in os.scandir('locales') if lang.is_dir()]
 for lang in languages:

@@ -55,7 +55,7 @@ for current_version in ${versions}; do
       continue
    fi
  
-   languages="`find docs/locales/ -mindepth 1 -maxdepth 1 -type d -exec basename '{}' \;`"
+   languages="en `find docs/locales/ -mindepth 1 -maxdepth 1 -type d -exec basename '{}' \;`"
    for current_language in ${languages}; do
  
       # make the current language available to conf.py
@@ -113,10 +113,10 @@ cat > index.html <<EOF
 <html>
    <head>
       <title>helloWorld Docs</title>
-      <meta http-equiv = "refresh" content="0; url='/en/master/'" />
+      <meta http-equiv = "refresh" content="0; url='${GITHUB_REPOSITORY##*/}/en/master/'" />
    </head>
    <body>
-      <p>Please wait while you're redirected to our <a href="/en/master/">documentation</a>.</p>
+      <p>Please wait while you're redirected to our <a href="/en/master/${GITHUB_REPOSITORY##*/}">documentation</a>.</p>
    </body>
 </html>
 EOF
