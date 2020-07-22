@@ -193,7 +193,10 @@ except NameError:
    html_context = dict()
 html_context['display_lower_left'] = True
 
-REPO_NAME = os.environ['REPO_NAME']
+if 'REPO_NAME' in os.environ:
+	REPO_NAME = os.environ['REPO_NAME']
+else:
+	REPO_NAME = ''
  
 # SET CURRENT_LANGUAGE
 if 'current_language' in os.environ:
