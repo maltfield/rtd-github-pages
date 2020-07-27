@@ -17,8 +17,9 @@ For more information, see this article:
 1. On your forked repo, go to the "Actions" tab and click "I understand my workflows, go ahead and enable them" to enable GitHub workflows
 1. On your forked repo, go to the "Settings" tab. Under "GitHub Pages" choose 'gh-pages branch' under "Source"
 1. Edit the files in [src/](/src/) and [docs/](/docs) as needed
+1. `git commit` and `git push` something to trigger your site to be built
 
-When you push to github.com on master, github will automatically spin up a container in their cloud to update your documentation.
+Every time you push to github.com on master, github will automatically spin up a container in their cloud to update your documentation.
 
 For more details on how this works, see [Continuous Documentation: Hosting Read the Docs on GitHub Pages](https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1/)
 
