@@ -39,8 +39,8 @@ The GitHub-Pages-hosted "Hello World" example site built by this repo can be vie
 
 The following Githb-Pages-hosted Read the Docs sites have been created by cloning this repo:
 
- * [BusKill Docs](https://docs.buskill.in/buskill-app/en/stable/)
- * [Python Bootcamp for Science](https://vienneae.github.io/rtd-github-pages/en/master/index.html)
+ * [BusKill Docs](https://docs.buskill.in/buskill-app/en/stable/) ([repo](https://github.com/BusKill/buskill-app/tree/master/docs))
+ * [Python Bootcamp for Science](https://vienneae.github.io/rtd-github-pages/en/master/index.html) ([repo](https://github.com/vienneae/rtd-github-pages/tree/master/docs))
 
 # License
 
