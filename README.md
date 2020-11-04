@@ -1,3 +1,5 @@
+![docs_pages_workflow](https://github.com/maltfield/rtd-github-pages/workflows/docs_pages_workflow/badge.svg?branch=master)
+
 # Continuous Documentation: Hosting Read the Docs on GitHub Pages
 
 This repo is a fork-ready base for your project's documentation. It lets you host a sphinx-generated site (with the Read the Docs theme) on GitHub Pages using GitHub Actions.
