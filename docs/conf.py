@@ -19,6 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
+import json
 import os
 import sys
 
@@ -26,14 +27,18 @@ from git import Repo
 
 
 project = 'helloWorld'
-copyright = '2020, Michael Altfield'
-author = 'Michael Altfield'
+copyright = '2020, Anton Buyskikh'
+author = 'Anton Buyskikh'
 
-# The short X.Y version
-version = ''
-# The full version, including alpha/beta/rc tags
-release = '1.0.0'
 
+if 'current_version' in os.environ:
+    # get the current_version env var set by build_docs.sh
+    current_version = os.environ['current_version']
+else:
+    raise ValueError('Define current_version in environment')
+
+version = current_version
+release = current_version
 
 # -- General configuration ---------------------------------------------------
 
@@ -140,7 +145,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'helloWorld.tex', 'helloWorld Documentation',
-     'Michael Altfield', 'manual'),
+     'Anton Buyskikh', 'manual'),
 ]
 
 
@@ -201,7 +206,7 @@ html_context['display_lower_left'] = True
 if 'REPO_NAME' in os.environ:
     REPO_NAME = os.environ['REPO_NAME']
 else:
-    REPO_NAME = ''
+    raise ValueError('Define REPO_NAME in environment')
 
 
 # tell the theme which language to we're currently building
@@ -209,14 +214,6 @@ html_context['current_language'] = language
 
 # SET CURRENT_VERSION
 repo = Repo(search_parent_directories=True)
-
-if 'current_version' in os.environ:
-    # get the current_version env var set by build_docs.sh
-    current_version = os.environ['current_version']
-else:
-    # the user is probably doing `make html`
-    # set this build's current version by looking at the branch
-    current_version = repo.active_branch.name
 
 # tell the theme which version we're currently on ('current_version' affects
 # the lower-left rtd menu and 'version' affects the logo-area version)
@@ -257,9 +254,10 @@ html_context['downloads'].append(
 ##########################
 
 html_context['display_github'] = True
-html_context['github_user'] = 'maltfield'
-html_context['github_repo'] = 'rtd-github-pages'
+html_context['github_user'] = 'anton-buyskikh'
+html_context['github_repo'] = 'repoName'
 html_context['github_version'] = 'dev/docs/'
 
+# logging
 print('html_context=')
-print(html_context)
+print(json.dumps(html_context, sort_keys=True, indent=4))
