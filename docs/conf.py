@@ -260,3 +260,6 @@ html_context['display_github'] = True
 html_context['github_user'] = 'maltfield'
 html_context['github_repo'] = 'rtd-github-pages'
 html_context['github_version'] = 'dev/docs/'
+
+print('html_context=')
+print(html_context)
