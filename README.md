@@ -1,4 +1,4 @@
-![docs_pages_workflow](https://github.com/maltfield/rtd-github-pages/workflows/docs_pages_workflow/badge.svg?branch=master)
+![docs_pages_workflow](https://github.com/maltfield/rtd-github-pages/workflows/docs_pages_workflow/badge.svg?branch=dev)
 
 # Continuous Documentation: Hosting Read the Docs on GitHub Pages
 
@@ -21,7 +21,7 @@ For more information, see this article:
 1. Make a small change to [docs/index.rst](/docs/index.rst)
 1. `git commit` and `git push` something to trigger your site to be built
 
-Every time you push to github.com on master, github will automatically spin up a container in their cloud to update your documentation.
+Every time you push to github.com on dev, github will automatically spin up a container in their cloud to update your documentation.
 
 After you begin to edit the contents of the site, you'll probably also want to customize  the following files:
 
