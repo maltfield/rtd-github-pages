@@ -16,7 +16,7 @@ pip install --no-cache-dir \
    pygments \
    nbsphinx>=0.8 \
    recommonmark \
-   sphinx>=3.6 \
+   sphinx~=3.3 \
    sphinx-copybutton \
    sphinx-rtd-theme \
    sphinx-toggleprompt \
