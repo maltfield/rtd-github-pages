@@ -3,16 +3,15 @@ name: docs_pages_workflow
 # execute this workflow automatically when a we push to master
 on:
   push:
- 
-jobs:
- 
+
+jobs: 
   build_docs_job:
     runs-on: ubuntu-latest
     container: ubuntu:20.04
- 
+
     steps:
- 
-    - name: Prereqs
+
+    - name: Clone the repo
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
@@ -20,7 +19,7 @@ jobs:
         apt-get install -y git
         git clone "https://token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" .
       shell: bash
- 
+
     - name: Execute script to build our documentation and update pages
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
