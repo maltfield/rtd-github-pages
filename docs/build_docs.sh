@@ -6,9 +6,18 @@ export DEBIAN_FRONTEND=noninteractive
 #################### INSTALL DEPENDS ##########################################
 
 apt-get update
-apt-get -y install rsync python3-sphinx python3-sphinx-rtd-theme python3-stemmer python3-git python3-pip python3-virtualenv python3-setuptools -y
+apt-get -y install rsync python3 python3-pip -y
 
-python3 -m pip install --upgrade rinohtype pygments
+pip install --no-cache-dir \
+   rinohtype \
+   pygments \
+   git \
+   nbsphinx>=0.8 \
+   recommonmark \
+   sphinx>=3.6 \
+   sphinx-copybutton \
+   sphinx-rtd-theme \
+   sphinx-toggleprompt \
 
 #################### DECLARE VARIABLES ########################################
 
