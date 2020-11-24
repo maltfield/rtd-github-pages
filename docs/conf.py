@@ -21,7 +21,10 @@
 
 import os
 import sys
+
 from git import Repo
+
+
 project = 'helloWorld'
 copyright = '2020, Michael Altfield'
 author = 'Michael Altfield'

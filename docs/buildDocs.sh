@@ -4,44 +4,44 @@ set -x
 export DEBIAN_FRONTEND=noninteractive
 
 #################### INSTALL DEPENDS ##########################################
- 
+
 apt-get update
-apt-get -y install git rsync python3-sphinx python3-sphinx-rtd-theme python3-stemmer python3-git python3-pip python3-virtualenv python3-setuptools -y
- 
+apt-get -y install rsync python3-sphinx python3-sphinx-rtd-theme python3-stemmer python3-git python3-pip python3-virtualenv python3-setuptools -y
+
 python3 -m pip install --upgrade rinohtype pygments
- 
+
 #################### DECLARE VARIABLES ########################################
- 
+
 pwd
 ls -lah
 export SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)
- 
+
 # make a new temp dir which will be our GitHub Pages docroot
 docroot=`mktemp -d`
 
 export REPO_NAME="${GITHUB_REPOSITORY##*/}"
- 
+
 #################### BUILD DOCS ###############################################
- 
+
 # first, cleanup any old builds' static assets
 make -C docs clean
- 
+
 # get a list of branches and tags, excluding 'HEAD' and 'gh-pages'
 versions="master dev"
 for current_version in ${versions}; do
- 
+
    # make the current version available to conf.py
    export current_version
    git checkout ${current_version}
- 
+
    echo "INFO: Building sites for ${current_version}"
- 
+
    # skip this branch if it doesn't have our docs dir & sphinx config
    if [ ! -e 'docs/conf.py' ]; then
       echo -e "\tINFO: Couldn't find 'docs/conf.py' (skipped)"
       continue
    fi
- 
+
    echo "INFO: Building"
 
    # HTML #
@@ -59,28 +59,28 @@ for current_version in ${versions}; do
 
    # copy the static assets produced by the above build into our docroot
    rsync -av "docs/_build/html/" "${docroot}/"
- 
+
 done
- 
+
 # return to master branch
 git checkout master
- 
+
 #################### Update GitHub Pages ######################################
- 
+
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
- 
+
 pushd "${docroot}"
- 
+
 # don't bother maintaining history; just generate fresh
 git init
 git remote add deploy "https://token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 git checkout -b gh-pages
- 
+
 # add .nojekyll to the root so that github won't 404 on content added to dirs
 # that start with an underscore (_), such as our "_content" dir..
 touch .nojekyll
- 
+
 # add redirect from the docroot to our default docs version
 cat > index.html <<EOF
 <!DOCTYPE html>
@@ -94,11 +94,11 @@ cat > index.html <<EOF
    </body>
 </html>
 EOF
- 
+
 # Add README
 cat > README.md <<EOF
 # GitHub Pages Cache
- 
+
 Nothing to see here. The contents of this branch are essentially a cache that's not intended to be viewed on github.com.
  
  
