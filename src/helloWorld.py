@@ -1,7 +1,6 @@
 """This is a very simple helloWorld python script"""
 def helloWorld( msg ):
-    """
-    This is a simple function that prints a message
+    """This is a simple function that prints any message.
  
     Parameters:
        msg (str): The string to print
