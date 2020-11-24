@@ -8,6 +8,8 @@ Welcome to helloWorld's documentation!
 
 Let's try to add something.
 
+New development after v0.1.1
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
