@@ -226,7 +226,7 @@ html_context['version'] = current_version
 # POPULATE LINKS TO OTHER VERSIONS
 html_context['versions'] = list()
 
-versions = [branch.name for branch in repo.branches]
+versions = [branch.name for branch in repo.branches + repo.tags]
 for version in versions:
     html_context['versions'].append(
         (version, '/' + REPO_NAME + '/' + version + '/'))
