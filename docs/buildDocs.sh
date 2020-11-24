@@ -31,7 +31,7 @@ export REPO_NAME="${GITHUB_REPOSITORY##*/}"
 make -C docs clean
  
 # get a list of branches and tags, excluding 'HEAD' and 'gh-pages'
-versions="main dev"
+versions="master dev"
 for current_version in ${versions}; do
  
    # make the current version available to conf.py
