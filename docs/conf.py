@@ -220,9 +220,6 @@ else:
 html_context['current_version'] = current_version
 html_context['version'] = current_version
 
-# POPULATE LINKS TO OTHER LANGUAGES
-html_context['languages'] = [('en', '/' + REPO_NAME + current_version + '/')]
-
 # POPULATE LINKS TO OTHER VERSIONS
 html_context['versions'] = list()
 

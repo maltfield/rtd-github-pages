@@ -3,18 +3,14 @@ set -x
 
 export DEBIAN_FRONTEND=noninteractive
 
-###################
-# INSTALL DEPENDS #
-###################
+#################### INSTALL DEPENDS ##########################################
  
 apt-get update
 apt-get -y install git rsync python3-sphinx python3-sphinx-rtd-theme python3-stemmer python3-git python3-pip python3-virtualenv python3-setuptools -y
  
 python3 -m pip install --upgrade rinohtype pygments
  
-#####################
-# DECLARE VARIABLES #
-#####################
+#################### DECLARE VARIABLES ########################################
  
 pwd
 ls -lah
@@ -25,9 +21,7 @@ docroot=`mktemp -d`
 
 export REPO_NAME="${GITHUB_REPOSITORY##*/}"
  
-##############
-# BUILD DOCS #
-##############
+#################### BUILD DOCS ###############################################
  
 # first, cleanup any old builds' static assets
 make -C docs clean
@@ -71,9 +65,7 @@ done
 # return to master branch
 git checkout master
  
-#######################
-# Update GitHub Pages #
-#######################
+#################### Update GitHub Pages ######################################
  
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
