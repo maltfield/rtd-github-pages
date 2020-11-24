@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x
 
+export DEBIAN_FRONTEND=noninteractive
+
 ###################
 # INSTALL DEPENDS #
 ###################
