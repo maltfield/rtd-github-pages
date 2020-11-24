@@ -211,7 +211,7 @@ html_context['current_language'] = language
 repo = Repo(search_parent_directories=True)
 
 if 'current_version' in os.environ:
-    # get the current_version env var set by buildDocs.sh
+    # get the current_version env var set by build_docs.sh
     current_version = os.environ['current_version']
 else:
     # the user is probably doing `make html`

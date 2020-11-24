@@ -6,7 +6,7 @@ export DEBIAN_FRONTEND=noninteractive
 #################### INSTALL DEPENDS ##########################################
 
 apt-get update
-apt-get -y install rsync python3 python3-pip -y
+apt-get -y install rsync python3 python3-git python3-pip -y
 
 ln -s /usr/bin/python3 /usr/bin/python
 ln -s /usr/bin/pip3 /usr/bin/pip
@@ -14,7 +14,6 @@ ln -s /usr/bin/pip3 /usr/bin/pip
 pip install --no-cache-dir \
    rinohtype \
    pygments \
-   git \
    nbsphinx>=0.8 \
    recommonmark \
    sphinx>=3.6 \
