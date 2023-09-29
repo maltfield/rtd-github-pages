@@ -21,8 +21,11 @@ The following system parameters may be specified:
 
 ARCHLVL
 +++++++
+
+
 .. code-block:: none
    ARCHLVL S/370 | ESA/390 | ESAME | z/Arch
+...
 
 Specifies the initial architecture mode.
 
