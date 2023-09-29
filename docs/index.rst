@@ -11,6 +11,8 @@ Welcome to helloWorld's documentation!
    :caption: Contents:
 
    autodoc
+   installation
+   configuration
 
 
 Indices and tables
