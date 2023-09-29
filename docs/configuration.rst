@@ -21,13 +21,13 @@ The following system parameters may be specified:
 
 ARCHLVL
 +++++++
-`ARCHLVL` *`S/370 | ESA/390 | ESAME | z/Arch`*
+``ARCHLVL S/370 | ESA/390 | ESAME | z/Arch``
 Specifies the initial architecture mode.
-- use `S/370` for OS/360, VM/370, and MVS 3.8.
-- use `ESA/390` for MVS/XA, MVS/ESA, OS/390, VM/ESA, VSE/ESA, Linux/390, and ZZSA.
-- use `z/Arch` or `ESAME` for z/OS and zLinux. This is the default.
+- use ``S/370`` for OS/360, VM/370, and MVS 3.8.
+- use ``ESA/390`` for MVS/XA, MVS/ESA, OS/390, VM/ESA, VSE/ESA, Linux/390, and ZZSA.
+- use ``z/Arch`` or `ESAME` for z/OS and zLinux. This is the default.
 
-When `z/Arch` or `ESAME` is specified, the machine will always IPL in ESA/390 mode, but is capable of being switched into z/Architecture mode after IPL. This is handled automatically by all z/Architecture operating systems.
+When ``z/Arch`` or ``ESAME`` is specified, the machine will always IPL in ESA/390 mode, but is capable of being switched into z/Architecture mode after IPL. This is handled automatically by all z/Architecture operating systems.
 
 When `ARCHLVL S/370` is set, the current LPARNUM and CPUIDFMT settings will be automatically changed to `BASIC`. When `ARCHLVL z/Arch` is set, `LPARNUM` and `CPUIDFMT` will be reset back to `1` and `0` respectively (if needed). Refer to the *"Limited automatic LPARNUM updating when setting certain architecture modes"* section of the Release Notes document for more information.
 
