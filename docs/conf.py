@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'helloWorld'
+project = 'Hercules'
 copyright = '2020, Michael Altfield'
 author = 'Michael Altfield'
 
