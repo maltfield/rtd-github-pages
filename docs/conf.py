@@ -19,9 +19,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Hercules'
-copyright = '2020, Michael Altfield'
-author = 'Michael Altfield'
+project = 'Hercules Documentation Test'
+copyright = '2023'
+author = 'Test Author (this text is in conf.py)'
 
 # The short X.Y version
 version = ''
@@ -248,7 +248,7 @@ rinoh_documents = [(
  master_doc,
  'target',
  project+ ' Documentation',
- '© ' +copyright,
+ '© ' +,
 )]
 today_fmt = "%B %d, %Y"
  
