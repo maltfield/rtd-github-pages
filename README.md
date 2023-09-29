@@ -3,8 +3,15 @@
 # Hercules Documentation Testing
 
 /docs directory contains reStructuredText files.
+
 Changes commited will trigger automatic Action to build and deploy into the gh-pages branch.
+
 Published [here](https://gsf600y.github.io/rtd-github-pages/)
+
+
+
+
+
 
 
 # Continuous Documentation: Hosting Read the Docs on GitHub Pages
