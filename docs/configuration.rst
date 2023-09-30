@@ -366,7 +366,7 @@ Specifies the root directory where the HTTP server's files reside. If not specif
 
 HTTP   START
 ++++++++++++
-### HTTP   START
+HTTP   START
 Starts the HTTP server. (Note: The server is no longer started by default.)
 
 IGNORE INCLUDE_ERRORS
@@ -578,8 +578,9 @@ PANTITLE
 PANTITLE   "title-string"             (deprecated; use PANOPT instead)
 This statement has been deprecated in favor of the PANOPT statement instead.
 
-
-### PGMPRDOS   RESTRICTED | LICENSED
+PGMPRDOS
+++++++++
+PGMPRDOS   RESTRICTED | LICENSED
 Specifies whether or not Hercules will run licensed program product ESA or z/Architecture operating systems. If RESTRICTED is specified, Hercules will stop all CPUs when a licensed program product operating system is detected. Specify LICENSED to allow these operating systems to run normally. This parameter has no effect on Linux/390, Linux for z/Series, or any 370-mode OS.
 
 NOTE:  It is YOUR responsibility to comply with the terms of the license for the operating system you intend to run on Hercules. If you specify LICENSED and run a licensed operating system in violation of that license, then don't come after the Hercules developers when the vendor sends their lawyers after you!
@@ -587,11 +588,15 @@ NOTE:  It is YOUR responsibility to comply with the terms of the license for the
 RESTRICTED is the default. Specifying LICENSED will produce a message when a licensed operating system is detected to remind you of your responsibility to comply with software license terms.
 
 
-### PLANT   name
+PLANT
++++++
+PLANT   name
 Specifies the 1-4 character PLANT name returned the STSI instruction. Valid characters are 0-9 and uppercase A-Z only. The default is ZZ.
 
 
-### SCSIMOUNT   NO | YES | nn
+SCSIMOUNT
++++++++++
+SCSIMOUNT   NO | YES | nn
 Specifies whether automatic detection of SCSI tape mounts are to be enabled or not.
 
 Specifying NO or 0 seconds (the default) indicates the option is disabled, forcing all SCSI tape mounts to be done manually via an appropriate devinit command.
@@ -603,7 +608,9 @@ The scsimount panel command may also be used to display and/or modify this value
 Note:  enabling this option may cause Hercules to take longer to shutdown depending on the value specified for this option as well as how the host operating system (Windows, Linux, etc) and associated hardware (SCSI adapter) behaves to drive status queries for drives which do not have any media currently mounted on them.
 
 
-### SHCMDOPT   DISABLE | ENABLE   [DIAG8 | NODIAG8]
+SHCMDOPT
+++++++++
+SHCMDOPT   DISABLE | ENABLE   [DIAG8 | NODIAG8]
 When set to DISABLE, the sh (host shell command) and exec (Rexx execute script) commands are globally disabled and will result in an error if entered either directly via the hardware console or programmatically via the DIAG8CMD interface.
 
 If the optional NODIAG8 option is specified, then only the programmatic execution of commands via the the Diagnose 8 interface are disabled, but shell and Rexx commands entered directly via the Hercules command line still work. This includes commands entered via the HTTP server facility as well as commands issued by .rc "run command" scripts too (automatically at startup or directly or indirectly via the script command).
@@ -611,15 +618,22 @@ If the optional NODIAG8 option is specified, then only the programmatic executio
 Security Alert:  Enabling this feature has security consequences. When ENABLE DIAG8 is specified it is possible for guest operating systems running under Hercules to issue commands directly to the host operating system.
 
 
-### SHRDPORT   nnnn
+SHRDPORT
+++++++++
+SHRDPORT   nnnn
 Specifies the port number (in decimal) on which the Shared Device server will listen. Specifying SHRDPORT will allow other Hercules instances to access devices on this instance. (Currently only DASD devices may be shared). By default, the other Hercules instances (clients) will use port 3990. If you specify a different port number, then you will have to specify this port number on the device statement for the other Hercules clients. If no SHRDPORT statement is present then the Shared Device server thread will not be activated.
 
-### SYSEPOCH   yyyy [±years]
+
+SYSEPOCH
+++++++++
+SYSEPOCH   yyyy [±years]
 Specifies the base date for the TOD clock. Use the default value (1900) for all systems except OS/360. Use 1960 for OS/360. Values other than these were formerly used to offset the TOD clock by a number of years to move the date before the year 2000 for non-Y2K-compliant operating systems. This use is deprecated, and support will be removed in a future release; at that time, only values of 1900 or 1960 will be accepted. Other values will produce a warning message with the equivalent values to specify in the SYSEPOCH statement.
 An optional year offset may be specified, and will be treated as though it had been specified on a YROFFSET statement.
 
 
-### SYSGPORT   NO  -or-  3278  -or-  nnnn  -or-  host:port
+SYSGPORT
+++++++++
+SYSGPORT   NO  -or-  3278  -or-  nnnn  -or-  host:port
 Specifies (typically) the port number (in decimal) to which tn3270 and telnet clients should use to connect to a SYSG console device or the value NO. The default is NO, meaning no separate listening socket will be created for SYSG console connections. If an invalid value is specified Hercules defaults to port number 3278. See also the CNSLPORT statement.
 
 The SYSGPORT statement may also be specified as host:port, where host identifies the IP address of the host interface the telnet console server should bind to (listen for connections on). If not specified the server will accept connections on the port from any host interface.
@@ -627,7 +641,9 @@ The SYSGPORT statement may also be specified as host:port, where host identifies
 See the Telnet/tn3270 Console How-To for additional information about setting up a telnet or tn3270 client.
 
 
-### TIMERINT   DEFAULT | nnnn
+TIMERINT
+++++++++
+TIMERINT   DEFAULT | nnnn
 Specifies the internal timers update interval, in microseconds. This parameter specifies how frequently Hercules's internal timers-update thread updates the TOD Clock, CPU Timer, and other architectural related clock/timer values.
 
 When the z/Architecure Transactional-Execution Facility (073_TRANSACT_EXEC) is not installed or enabled, the minimum and default intervals are 1 and 50 microseconds respectively, which strikes a reasonable balance between clock accuracy and overall host performance.
@@ -641,11 +657,15 @@ Also note that due to host system limitations and/or design, some hosts may roun
 CAUTION!  While lower TIMERINT values may help increase the accuracy of your guest's TOD Clock and CPU Timer values, it could also have a severe negative impact on host operating system performance as well. You should exercise extreme caution when choosing your TIMERINT value in relationship to the actual process priority (nice value) of the Hercules process itself.
 
 
-### TODDRAG   n.nn
+TODDRAG
++++++++
+TODDRAG   n.nn
 Specifies the TOD clock drag factor. This parameter can be used to slow down or speed up the TOD clock by a factor of nn. A significant slowdown can improve the performance of some operating systems which consume significant amounts of CPU time processing timer interrupts. A drag factor of 2.0 slows down the clock by 50%. A drag factor of 0.5 doubles the speed of the clock. A drag factor of 1.01 slows down the clock by 1%, and 0.99 speeds up the clock by 1%.
 
 
-### TRACEOPT   [TRADITIONAL | REGSFIRST | NOREGS]  [NOCH9OFLOW]
+TRACEOPT
+++++++++
+TRACEOPT   [TRADITIONAL | REGSFIRST | NOREGS]  [NOCH9OFLOW]
 Sets the Hercules instruction and device tracing option(s).
 
 TRADITIONAL (the default), displays the instruction about to be executed followed by the current register values such that pressing the ENTER key (to execute the displayed instruction) then shows the next instruction to be executed followed by a display of the updated registers.
@@ -657,11 +677,15 @@ NOREGS suppresses the registers display altogether and shows just the instructio
 NOCH9OFLOW suppresses CCW tracing of printer channel-9 overflow unit checks which are considered completely normal and not true device errors. The unit checks still occur, they are simply not traced unless CCW tracing is explicitly enabled on the device.
 
 
-### TZOFFSET   ±hhmm
+TZOFFSET
+++++++++
+TZOFFSET   ±hhmm
 Specifies the hours and minutes by which the TOD clock will be offset from the current system time. For GMT, use the default value (0000). For timezones west of Greenwich, specify a negative value (example: -0500 for US Eastern Standard Time, -0800 for US Pacific Standard Time). For timezones east of Greenwich, specify a positive value (example: +0100 for Central European Time, +0930 for South Australian Time).
 
 
-### XPNDSIZE   nnnn | nnnM | nnnG | nnnT | nnnP | nnnE
+XPNDSIZE
+++++++++
+XPNDSIZE   nnnn | nnnM | nnnG | nnnT | nnnP | nnnE
 Specifies the expanded storage size in megabytes, where nnnn is a decimal number. Or, nnnM  where M  is K - Kilobytes, M - Megabytes, G - Gigabytes, T - Terabytes, P - Petabytes, E - Exabytes.
 
 Storage sizes not on a 1M boundary are rounded up to the next 1M boundary. The lower limit and default is 0.
@@ -677,12 +701,15 @@ Specifies a number of years to offset the TOD clock from the actual date. Positi
 A comment preceded by a # sign may be appended to any system parameter statement.
 
 Symbol substitutions
+====================
 In configuration and device statements, as well as in panel commands and OAT files, symbols may be substituted for text.
 
 Syntax
+------
 To substitute symbol symbol with its contents, the symbol should be enclosed within parenthesis and preceded by a $ sign. For example, if symbol FOO contains the text string "BAR" then $(FOO) will be substituted with the string "BAR";. Symbol names are case sensitive.
 
 Example
++++++++
         DEFSYM  TAPEDIR  "/home/hercules/tapes"
 
         ...
@@ -693,7 +720,9 @@ Example
 In this example, device 0380 will be a 3420 loaded with the AWS tape file in /home/hercules/tapes/scratch.aws
 
 Special symbols
+---------------
 Device group symbols
+++++++++++++++++++++
 When multiple devices are defined with a single device definition statement, then the symbols
 
   CUU  
@@ -709,12 +738,15 @@ are defined to contain for each device the relevant device address. For example:
 will define two 3340 packs, with device 0200 being loaded with the file myvols.200 and device 0201 defined with myvols.201.
 
 Environment variables
++++++++++++++++++++++
 If a symbol is not explicitly defined by a DEFSYM statement and an environment variable by the same name exists, the string contents of that environment variable will be used for substitution.
 
 Undefined symbols
++++++++++++++++++
 If a symbol is not defined by an explicit DEFSYM, is not an automatically generated symbol and is not an environment variable, an empty string will be substituted.
 
 Escaping substitution, recursion
+================================
 To be able to specify the '$(' string without incurring substitution, an additional '$' sign should be used. For example, $$(FOO) will not be substituted. If substitution is required but the preceding text is to contain a '$' sign as the very last character, then $$$(FOO) should be specified. Thus, if symbol FOO contains "BAR", then $$(FOO) will remain "$$(FOO)" while $$$(FOO) will become "$BAR".
 
 Substitution is not recursive (only one substitution pass is made).
@@ -735,6 +767,7 @@ In other words each symbol substitution technique is supported completely separa
 Further note that symbol names, being the names of environment variables, are subject to whatever case sensitivity or case insensitivity that the host operating system happens to enforce/allow. On Windows, environment variables are not case sensitive, whereas on other operating systems they may be. Thus "${FOO}", "${foo}", "${Foo}", etc, all cause the same value to be substituted on Windows, whereas the DEFSYM symbols $(FOO) and $(foo), being two completely different and unique symbols, could be substituted with two completely different values (since DEFSYM is case sensitive across all supported platforms, including Windows).
 
 Syntax
+------
 To substitute symbol symbol with the current environment variable value, the symbol should be enclosed within braces and preceded by a $ sign. For example, if an environment variable named FOO holds the value "BAR", then ${FOO} will be substituted with the string "BAR". If the environment variable "FOO" is not defined then a null (empty) string is substituted instead.
 
 If the string "${FOO:=myfoo}" is used instead, then the value "BAR" will still be substituted if the value "BAR" was indeed previously assigned to FOO, but will be substituted with the value "myfoo" instead if the environment variable FOO is currently undefined.
@@ -743,8 +776,12 @@ Note too that the default value is a literal string and no substitution is appli
 
 Symbol names (environment variable names) are not case sensitive on Windows whereas they might be on other host operating systems.
 
+
 Process and Thread Priorities
+=============================
+
 Process Priorities
+------------------
 For Windows, the following conversions are used for translating Unix process 'nice' values to Windows process priority classes:
 
 'Nice'
@@ -765,7 +802,10 @@ Meaning
  	 	 	 
 +15 to +19	 	Idle	Process whose threads run only when the system is idle. The threads of the process are preempted by the threads of any process running in a higher priority class. An example is a screen saver. The idle-priority class is inherited by child processes.
 Caution!  A high process priority (or low 'nice' value) could have a impact on how Hercules's internal thread priorities are interpreted, thereby impacting the overall performance of your host system.
+
+
 Thread Priorities
+-----------------
 The following are the currently assigned internal relative thread priorities for Hercules:
 
 Relative
@@ -788,7 +828,11 @@ Description
  	 	 	 
 7	 	Timer	TOD Clock and Timer thread is the thread which manages the internal emulated TOD Clock and CPU Timer components of your emulated mainframe. In order to ensure accurate time of day and elapsed time and/or CPU time measurement, it should always be the very highest priority thread within Hercules.
 Caution:  Hercules's internal thread priorities could be interpreted differently based on its process priority (or 'nice' value), thereby impacting the overall performance of your host system.
+
+
 Device statements
+=================
+
 The remaining statements in the configuration file are device statements. There must be one device statement for each I/O device or group of identical I/O devices. The format of the device statement is:
 
 devnum(s)   devtype   [ arguments ]   [ # comments... ]
@@ -832,6 +876,7 @@ A comment preceded by a # sign may be appended to any device definition statemen
  	
 
 Supported Device Types
+++++++++++++++++++++++
 Device type	Description	Emulated by
 3270, 3287	Local non-SNA 3270 display or printer	TN3270 client connection
 SYSG	Integrated 3270 console	TN3270 client connection
@@ -854,9 +899,12 @@ via TCP connection (true 3088 CTCA)	"CTCE" driver
 2305, 2311, 2314, 3330, 3340, 3350, 3375, 3380, 3390, 9345	CKD direct access storage devices	Disk file
 2703	Communication Line, Remote Teletype, etc.	TCP Socket
 
+
 Arguments required for each device type
+---------------------------------------
 
 Local non-SNA 3270 devices
+++++++++++++++++++++++++++
 There are no required arguments for this particular device type, but there are however several optional arguments which are discussed below.
 
 To use this device, a tn3270 client must connect to the host machine via the port number specified on the CNSLPORT statement. A valid tn3270 device type, such as IBM-3278, must be used. See the Telnet/tn3270 Console How-To for additional information about setting up a tn3270 client.
@@ -887,6 +935,7 @@ The terminal group name argument, if specified, always takes precedence over any
 To summarize, the device number suffix always takes precedence over any group name which may also be specified, and any group name, if specified, always takes precedence over any IP address / subnet mask value which may also be specified.
 
 Integrated 3270 console device   (SYSG)
++++++++++++++++++++++++++++++++++++++++
 The integrated 3270 (SYSG) console is similar to a local non-SNA 3270 device, except that it is not addressed by subchannel number and it is supported only by certain system control programs. The SYSG console is defined like a 3270 device except that the device number is ignored (but is usually specified as 0000) and the device type is specified as "SYSG". Only one SYSG console device may be defined in a configuration.
 
 Use tn3270 client software to connect to the SYSG console device via the port number specified on the SYSGPORT statement if specified (or to the port number specified on the CNSLPORT statement if not specified), just as you would connect to a regular local non-SNA 3270 device. See the Telnet/tn3270 Console How-To for additional information about setting up a tn3270 client.
@@ -895,6 +944,7 @@ The SYSG console device configuration statement recognizes optional arguments wh
 
 
 Integrated Console printer-keyboard devices   (-C)
+++++++++++++++++++++++++++++++++++++++++++++++++++
 There are two optional arguments: the command prefix argument and the optional noprompt argument.
 
 Since integrated console printer-keyboard devices use the Hercules HMC panel (Hardware Management Console) for all input and output, the command prefix is needed so Hercules can distinguish between input meant for the device and normal Hercules panel command input.
@@ -933,6 +983,7 @@ The second optional argument for integrated console printer-keyboard devices is 
 
 
 Console printer-keyboard devices
+++++++++++++++++++++++++++++++++
 There are no required arguments for this particular device type, but there are however several optional arguments discussed below.
 
 To use this device, a telnet client must connect to the host machine via the port number specified on the CNSLPORT statement. See the Telnet/tn3270 Console How-To for additional information about setting up a telnet or tn3270 client.
@@ -945,6 +996,7 @@ Additionally, a terminal group name, IP address and subnet mask may all also be 
 
 
 Card reader devices
++++++++++++++++++++
 The argument specifies a list of file names containing card images. Additional arguments may be specified after the file names:
 
 sockdev
@@ -975,6 +1027,7 @@ Specifies, for EBCDIC files, that the file is automatically padded to a multiple
 
 
 Card punch devices
+++++++++++++++++++
 The argument specifies the name of a file to which the punched output will be written. Additional arguments may be specified after the file name:
 
 append
@@ -997,6 +1050,7 @@ Indicates the card punch is a socket device wherein the filename is actually a s
 
 
 Line printer devices
+++++++++++++++++++++
 The argument specifies the name of a file to which the printer output will be written. The output is written in the form of variable length lines of ASCII characters delimited by line feeds or by carriage return line feed sequences. Trailing blanks are removed from each line. Carriage control characters are translated to blank lines or ASCII form feed characters. If the file exists it will be overwritten.
 
 Additional arguments may be specified after the file name:
@@ -1077,6 +1131,7 @@ Tim Pinkawa has an example which shows how the print-to-pipe feature can be used
 
 
 Tape devices
+++++++++++++
 Five types of tape emulation are supported (see further below):   AWS,   HET,   FakeTape,   Optical Media Attach (OMA),   and   real SCSI .
 
 The only required parameter is the device filename. All other parameters are optional and must follow the filename. Use * (asterisk) for the filename to specify an empty (unmounted) tape drive.
@@ -1254,6 +1309,7 @@ Debian 8.3 Linux systems running on HP (Hewlett Packard) hardware using StorageT
 
 
 Communication and Channel-to-Channel devices
+++++++++++++++++++++++++++++++++++++++++++++
 The first argument defines the emulation type, and the remaining arguments depend on the chosen emulation type.
 
 The following are the emulation types that are currently supported:
@@ -1631,6 +1687,7 @@ Specifies that debugging output is to be produced on the Hercules control panel.
 
 
 CKD DASD devices
+++++++++++++++++
 The argument specifies the name of a file containing the disk CKD DASD image or the INET address of a Hercules Shared Device server.
 
 The file consists of a 512-byte device header record followed by fixed length track images. The length of each track image depends on the emulated device type, and is always rounded up to the next multiple of 512 bytes.
@@ -1706,6 +1763,7 @@ Defines an optional overriding 12-digit serial number to be used for this device
 
 
 FBA DASD devices
+++++++++++++++++
 The file consists of fixed length 512-byte records, each of which represents one physical block of the emulated disk.
 
 The first argument specifies the name of a file which contains the FBA DASD image or the INET address of a Hercules Shared Device server.
@@ -1734,6 +1792,7 @@ The handling of shadow files for compressed CFBA devices is identical as that fo
 
 
 Communication Line - BSC
+++++++++++++++++++++++++
 (Preliminary 2703 BSC Support)
 
 Describes a BSC emulation line entry to either link 2 Hercules engines or a custom made program emulating a 2780, 3780 or 3x74, or a custom made program interfacing to a real BSC line. The line emulates a point-to-point BSC link. There is no point-to-multipoint handling.
@@ -1766,6 +1825,7 @@ ETO=0 | -1 | nnn | 10000
 Specifies the number of milliseconds before terminating an ENABLE operation on a timeout. the timeout applies when DIAL=NO|IN|INOUT is specified, the outgoing TCP call fails (DIAL=NO) and there is no previously or currently established TCP connection for this line. When DIAL=NO is specified, the timeout defaults to 10 seconds. For DIAL=IN|INOUT, the timeout defaults to -1.
 
 Communication Line - TTY
+++++++++++++++++++++++++
 (Preliminary 2703 TELE2 TTY Support)
 
 Describes a 2703 Telegraph Terminal Control Type II (TTY 33/35) stop/start line, providing access to the Host OS via a standard TELNET client. To the host OS the line emulates an asynchronous TELE2 connection. The communication is emulated over a TELNET connection.
@@ -1782,6 +1842,7 @@ TERM=TTY
 Specifies that this definition is for a TTY port. Required
 
 Additional 2703 Communication Line options
+++++++++++++++++++++++++++++++++++++++++++
 The following are some additional options that may also be specified for 2703 devices:
 
 APPEND=hh...
@@ -1834,8 +1895,3 @@ Specifies the terminal type. Use RXVT4APL for 8-bit and character translation in
 
 UCTRANS=YES | NO
 Enable automatic translation to uppercase.
-
-If you have a question about Hercules, see the Hercules Frequently-Asked Questions page.
-
-back
-Last updated 09/23/2023 10:54:31
