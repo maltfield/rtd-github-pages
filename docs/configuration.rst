@@ -207,7 +207,7 @@ count  specifies the number of unacknowledged keepalive packets sent before the 
 
 The default values for Windows are 3, 1, and 10. For non-Windows systems it is 3, 1, and 9. That is, send the initial probe 3 seconds after the connection goes idle and then wait no more than one second for it to be responded to. If it is not responded to within one second, then send up to 9 more probes (for a total of 10), each of which must also timeout without being responded to before the client is considered as having died and the connection thus automatically closed.
 
-Note: This is a built-in feature of TCP/IP and allows detection of unresponsive TCP/IP connections and not idle clients. That is to say, your connection will not be terminated after 3 seconds of idle time. Your 3270 session can remain idle for many minutes or hours or days without any data being transmitted. If the TCP/IP stack at the other end of the connection -- not your 3270 client itself -- fails to respond to the internal keepalive probe packets however, then it means that the TCP/IP stack itself is down or there has been a physical break in the connection.
+.. note:: This is a built-in feature of TCP/IP and allows detection of unresponsive TCP/IP connections and not idle clients. That is to say, your connection will not be terminated after 3 seconds of idle time. Your 3270 session can remain idle for many minutes or hours or days without any data being transmitted. If the TCP/IP stack at the other end of the connection -- not your 3270 client itself -- fails to respond to the internal keepalive probe packets however, then it means that the TCP/IP stack itself is down or there has been a physical break in the connection.
 
 Thus, even if your 3270 client is completely idle, your system's TCP/IP stack itself should still respond to the keepalive probes sent by the TCP/IP stack at the Hercules end of the link. If it doesn't, then TCP/IP will terminate the tn3270/telnet session which will cause Hercules to disconnect the terminal.
 
@@ -299,7 +299,7 @@ The default is DISABLE NOECHO
 
 
 ECPSVM
-++++++
+------
 ECPSVM   YES | NO | LEVEL nn    [ TRAP | NOTRAP ]
 Specifies whether ECPS:VM (Extended Control Program Support : Virtual Machine) support is to be enabled.
 
@@ -319,7 +319,7 @@ Please refer to the README.ECPSVM document for more detailed information, includ
 
 
 ENGINES
-+++++++
+-------
 ENGINES   [nn*]CP|IL|AP|IP[,...]
 Specifies the type of engine for each installed processor. The default engine type is CP.
 
@@ -337,7 +337,7 @@ The number of installed processor engines is determined by the MAXCPU statement.
 
 
 FACILITY
-++++++++
+--------
 FACILITY   ENABLE | DISABLE | QUERY  facility  [archlvl]
 Specifies a particular STFL/STFLE facility to be enabled or disabled, or a request to query of the current settings. Use QUERY ALL to obtain a list of valid facility  names that may be used for the given archlvl. Enter help facility for detailed FACILITY command/statement use.
 
@@ -347,7 +347,7 @@ The optional archlvl  argument limits the enable, disable or query function to a
 
 
 HERCPRIO
-++++++++
+--------
 HERCPRIO  nn             (deprecated; unsupported)
 TODPRIO   nn             (deprecated; unsupported)
 DEVPRIO   nn             (deprecated; unsupported)
@@ -356,7 +356,7 @@ The ability to define process and thread priorities has been removed from SDL Hy
 
 
 HTTP   PORT
-+++++++++++
+-----------
 HTTP   PORT   nnnn [[NOAUTH] | [AUTH userid password]]
 Specifies the port number (in decimal) on which the HTTP server will listen. The port number must either be 80 or within the range 1024 - 65535 inclusive. The server is not started until a subsequent HTTP START statement is found.
 
@@ -368,24 +368,24 @@ Security Alert!  The HTTP Server currently utilizes the insecure "http" protocol
 
 
 HTTP   ROOT
-+++++++++++
+-----------
 HTTP   ROOT   directory
 Specifies the root directory where the HTTP server's files reside. If not specified, the default value for Win32 builds of Hercules is the directory where the Hercules executable itself is executing out of, and for non-Win32 builds it is the directory specified as the default package installation directory when the Hercules executable was built (which can vary depending on how the Hercules package was built, but is usually /usr/local/share/hercules/).
 
 
 HTTP   START
-++++++++++++
+------------
 HTTP   START
 Starts the HTTP server. (Note: The server is no longer started by default.)
 
 IGNORE INCLUDE_ERRORS
-+++++++++++++++++++++
+---------------------
 IGNORE   INCLUDE_ERRORS
 Indicates that errors caused by subsequent INCLUDE statements for files which do not exist should instead be ignored rather than causing startup to be aborted (as would otherwise normally occur).
 
 
 INCLUDE
-+++++++
+-------
 INCLUDE   filepath
 An INCLUDE statement tells Hercules configuration file processing to treat the contents of the file specified by filepath as if its contents had appeared in the configuration file at the point where the INCLUDE statement appears.
 
@@ -393,7 +393,7 @@ Note that the included file may itself contain yet another INCLUDE statement as 
 
 
 IODELAY
-+++++++
+-------
 IODELAY   usec
 Specifies the amount of time (in microseconds) to wait after an I/O interrupt is ready to be set pending. This value can also be set using the Hercules console. The purpose of this parameter is to bypass a bug in the Linux/390 and zLinux dasd.c device driver. The problem is more apt to happen under Hercules than on a real machine because we may present an I/O interrupt sooner than a real machine.
 
@@ -401,7 +401,7 @@ NOTE: OSTAILOR LINUX no longer sets IODELAY to 800 since the problem described a
 
 
 LDMOD
-+++++
+-----
 LDMOD   module list
 Specifies additional modules that are to be loaded by the Hercules dynamic loader. The default search order is with the Hercules directory in the default DLL search path. Most systems also support absolute filenames (ie names starting with '/' or '.') in which case the default search path is not taken.
 
@@ -409,7 +409,7 @@ Multiple LDMOD statements may be used.
 
 
 LEGACYSENSEID
-+++++++++++++
+-------------
 LEGACYSENSEID   OFF | DISABLE | ON | ENABLE
 Specifies whether the SENSE ID CCW (X'E4') will be honored for the devices that originally didn't support that feature. This includes (but may not be limited to) 3410 and 3420 tape drives, 2311 and 2314 direct access storage devices, and 2703 communication controllers.
 
@@ -419,7 +419,7 @@ Because those legacy devices didn't originally support this command, and for com
 
 
 LOADPARM
-++++++++
+--------
 LOADPARM   xxxxxxxx
 Specifies the default eight-character IPL parameter used by some operating systems to select system parameters.
 
@@ -427,7 +427,7 @@ The specified value is used as the IPL command's default LOADPARM option paramet
 
 
 LOGOPT
-++++++
+------
 LOGOPT   TIMESTAMP | NOTIMESTAMP | DATESTAMP | NODATESTAMP |
 Sets logfile options. TIMESTAMP inserts a time stamp in front of each log message. NOTIMESTAMP logs messages without time stamps. Similarly, DATESTAMP and NODATESTAMP prefixes logfile messages with or without the current date. The current resolution of the stamp is one second.
 
@@ -435,13 +435,13 @@ The default is TIMESTAMP NODATESTAMP.
 
 
 LPARNAME
-++++++++
+--------
 LPARNAME   name
 Specifies the LPAR name returned by DIAG X'204'. The default is HERCULES.
 
 
 LPARNUM
-+++++++
+-------
 LPARNUM   BASIC | 1 | xx
 Specifies the one- or two-digit hexadecimal LPAR identification number stored by the STIDP instruction, or BASIC.
 
@@ -457,7 +457,7 @@ The default is LPARNUM 1 with a format-0 CPU ID.
 
 
 MAINSIZE
-++++++++
+--------
 MAINSIZE   nnnn | nnnK | nnnM | nnnG | nnnT | nnnP | nnnE
 Specifies the main storage size in megabytes, where nnnn  is a decimal number. Or, nnnM  where M  is K - Kilobytes, M - Megabytes, G - Gigabytes, T - Terabytes, P - Petabytes, E - Exabytes. The default on startup is 2M.
 
@@ -473,13 +473,13 @@ Use of storage sizes greater than supported by the guest operating system may ge
 
 
 MANUFACTURER
-++++++++++++
+------------
 MANUFACTURER   name
 Specifies the 1-16 character MANUFACTURER name returned the STSI instruction. Valid characters are 0-9 and uppercase A-Z only. The default is HRC.
 
 
 MAXCPU
-++++++
+------
 MAXCPU   nn
 Specifies the number of installed processor engines. The NUMCPU statement specifies the number of engines which will be configured online at startup time. All processors are CP engines unless otherwise specified by the ENGINES statement.
 
@@ -491,7 +491,7 @@ MAX_CPU_ENGS cannot exceed 64. For performance reasons, values above 32 are not 
 
 
 MODEL
-+++++
+-----
 MODEL   hardware_model [ capacity_model ] [ perm_capacity_model ] [ temp_capacity_model ]
 Specifies the 1-16 character MODEL names returned the STSI instruction. Valid characters are 0-9 and uppercase A-Z only. The default is EMULATOR.
 
@@ -499,7 +499,7 @@ If two operands are supplied, the first is the hardware model name (CPC ND model
 
 
 MODPATH
-+++++++
+-------
 MODPATH   path
 Specifies the relative or absolute path of the directory where dynamic modules should be loaded from. Only one directory may be specified. The path should be enclosed within double quotes if it contains any blanks.
 
@@ -507,7 +507,7 @@ When a modpath statement is specified, the path on the modpath statement is sear
 
 
 MOUNTED_TAPE_REINIT
-+++++++++++++++++++
+-------------------
 MOUNTED_TAPE_REINIT   DISALLOW | DISABLE | ALLOW | ENABLE
 Specifies whether reinitialization of tape drive devices (via the devinit command, in order to mount a new tape) should be allowed if there is already a tape mounted on the drive.
 
@@ -521,7 +521,7 @@ Also note that for SCSI tape drives the 'devinit nnnn *' command has no effect a
 
 
 NETDEV
-++++++
+------
 NETDEV   devname
 Specifies the name (or for Windows, the IP or MAC address) of the underlying default host network adapter to be used for Hercules communications devices unless overridden on the device statement itself.
 
@@ -535,7 +535,7 @@ Note: Hercules's networking support requires privileged access to your host's ne
 
 
 NUMCPU
-++++++
+------
 NUMCPU   nn
 Specifies the number of emulated processor engines which will be configured online at startup time. NUMCPU cannot exceed the value of MAXCPU. If NUMCPU is less than MAXCPU then the remaining engines can be configured online later. The default NUMCPU value is 1. The minimum value is 0.
 
@@ -543,7 +543,7 @@ Multiprocessor emulation works best if your host system actually has more than o
 
 
 OSTAILOR
-++++++++
+--------
 OSTAILOR   DEFAULT | OS/390 | z/OS | VM | z/VM | VSE | z/VSE | LINUX | OpenSolaris | QUIET | NULL
 Specifies the intended operating system. The effect of this parameter is to reduce control panel message traffic by selectively suppressing trace messages for program checks which are considered normal in the specified environment. QUIET suppresses all exception messages. NULL displays all exception messages.
 
@@ -561,7 +561,7 @@ Use the "pgmtrace" panel command to fine tune the current settings.
 
 
 PANOPT
-++++++
+------
 PANOPT   FULLPATH|NAMEONLY RATE=SLOW|FAST|nnn MSGCOLOR=NO|DARK|LIGHT TITLE=xxx
 Defines panel display options. NAMEONLY requests the extended panel screen (that displays the list of devices and is reached by pressing the ESC key) to display only the emulated device's base filename. The default is FULLPATH which displays the file's full path filename.
 
@@ -577,18 +577,18 @@ Note: neither the MSGCOLOR= nor the TITLE= option has any effect when Hercules i
 
 
 PANRATE
-+++++++
+-------
 PANRATE   SLOW | FAST | nn             (deprecated; use PANOPT instead)
 This statement has been deprecated in favor of the PANOPT statement instead.
 
 
 PANTITLE
-++++++++
+--------
 PANTITLE   "title-string"             (deprecated; use PANOPT instead)
 This statement has been deprecated in favor of the PANOPT statement instead.
 
 PGMPRDOS
-++++++++
+--------
 PGMPRDOS   RESTRICTED | LICENSED
 Specifies whether or not Hercules will run licensed program product ESA or z/Architecture operating systems. If RESTRICTED is specified, Hercules will stop all CPUs when a licensed program product operating system is detected. Specify LICENSED to allow these operating systems to run normally. This parameter has no effect on Linux/390, Linux for z/Series, or any 370-mode OS.
 
@@ -598,13 +598,13 @@ RESTRICTED is the default. Specifying LICENSED will produce a message when a lic
 
 
 PLANT
-+++++
+-----
 PLANT   name
 Specifies the 1-4 character PLANT name returned the STSI instruction. Valid characters are 0-9 and uppercase A-Z only. The default is ZZ.
 
 
 SCSIMOUNT
-+++++++++
+---------
 SCSIMOUNT   NO | YES | nn
 Specifies whether automatic detection of SCSI tape mounts are to be enabled or not.
 
@@ -618,7 +618,7 @@ Note:  enabling this option may cause Hercules to take longer to shutdown depend
 
 
 SHCMDOPT
-++++++++
+--------
 SHCMDOPT   DISABLE | ENABLE   [DIAG8 | NODIAG8]
 When set to DISABLE, the sh (host shell command) and exec (Rexx execute script) commands are globally disabled and will result in an error if entered either directly via the hardware console or programmatically via the DIAG8CMD interface.
 
@@ -628,20 +628,20 @@ Security Alert:  Enabling this feature has security consequences. When ENABLE DI
 
 
 SHRDPORT
-++++++++
+--------
 SHRDPORT   nnnn
 Specifies the port number (in decimal) on which the Shared Device server will listen. Specifying SHRDPORT will allow other Hercules instances to access devices on this instance. (Currently only DASD devices may be shared). By default, the other Hercules instances (clients) will use port 3990. If you specify a different port number, then you will have to specify this port number on the device statement for the other Hercules clients. If no SHRDPORT statement is present then the Shared Device server thread will not be activated.
 
 
 SYSEPOCH
-++++++++
+--------
 SYSEPOCH   yyyy [±years]
 Specifies the base date for the TOD clock. Use the default value (1900) for all systems except OS/360. Use 1960 for OS/360. Values other than these were formerly used to offset the TOD clock by a number of years to move the date before the year 2000 for non-Y2K-compliant operating systems. This use is deprecated, and support will be removed in a future release; at that time, only values of 1900 or 1960 will be accepted. Other values will produce a warning message with the equivalent values to specify in the SYSEPOCH statement.
 An optional year offset may be specified, and will be treated as though it had been specified on a YROFFSET statement.
 
 
 SYSGPORT
-++++++++
+--------
 SYSGPORT   NO  -or-  3278  -or-  nnnn  -or-  host:port
 Specifies (typically) the port number (in decimal) to which tn3270 and telnet clients should use to connect to a SYSG console device or the value NO. The default is NO, meaning no separate listening socket will be created for SYSG console connections. If an invalid value is specified Hercules defaults to port number 3278. See also the CNSLPORT statement.
 
@@ -651,7 +651,7 @@ See the Telnet/tn3270 Console How-To for additional information about setting up
 
 
 TIMERINT
-++++++++
+--------
 TIMERINT   DEFAULT | nnnn
 Specifies the internal timers update interval, in microseconds. This parameter specifies how frequently Hercules's internal timers-update thread updates the TOD Clock, CPU Timer, and other architectural related clock/timer values.
 
@@ -667,13 +667,13 @@ CAUTION!  While lower TIMERINT values may help increase the accuracy of your gue
 
 
 TODDRAG
-+++++++
+-------
 TODDRAG   n.nn
 Specifies the TOD clock drag factor. This parameter can be used to slow down or speed up the TOD clock by a factor of nn. A significant slowdown can improve the performance of some operating systems which consume significant amounts of CPU time processing timer interrupts. A drag factor of 2.0 slows down the clock by 50%. A drag factor of 0.5 doubles the speed of the clock. A drag factor of 1.01 slows down the clock by 1%, and 0.99 speeds up the clock by 1%.
 
 
 TRACEOPT
-++++++++
+--------
 TRACEOPT   [TRADITIONAL | REGSFIRST | NOREGS]  [NOCH9OFLOW]
 Sets the Hercules instruction and device tracing option(s).
 
@@ -687,13 +687,13 @@ NOCH9OFLOW suppresses CCW tracing of printer channel-9 overflow unit checks whic
 
 
 TZOFFSET
-++++++++
+--------
 TZOFFSET   ±hhmm
 Specifies the hours and minutes by which the TOD clock will be offset from the current system time. For GMT, use the default value (0000). For timezones west of Greenwich, specify a negative value (example: -0500 for US Eastern Standard Time, -0800 for US Pacific Standard Time). For timezones east of Greenwich, specify a positive value (example: +0100 for Central European Time, +0930 for South Australian Time).
 
 
 XPNDSIZE
-++++++++
+--------
 XPNDSIZE   nnnn | nnnM | nnnG | nnnT | nnnP | nnnE
 Specifies the expanded storage size in megabytes, where nnnn is a decimal number. Or, nnnM  where M  is K - Kilobytes, M - Megabytes, G - Gigabytes, T - Terabytes, P - Petabytes, E - Exabytes.
 
@@ -704,7 +704,9 @@ Notes:
 The actual upper limit is determined by your host system's architecture and operating system, the guest operating system, and the amount of physical memory and available paging space. The total of mainsize and xpndsize on host systems with a 32-bit architecture will be limited to less than 4G; host systems with a 64-bit architecture will be limited to less than 16E.
 Use of storage sizes greater than supported by the guest operating system may generate incorrect results or error conditions within the guest operating system.
 
-### YROFFSET   ±years
+YROFFSET
+--------
+YROFFSET   ±years
 Specifies a number of years to offset the TOD clock from the actual date. Positive numbers will move the clock forward in time, while negative numbers will move it backward. A common value for non-Y2K-compliant operating systems is YROFFSET -28, which has the advantage that the day of the week and the presence or absence of February 29 is the same as the current year. This value may not be specified as greater than ±142 years, the total range of the TOD clock. Specifying a value that causes the computed TOD clock year to be earlier than the value of SYSEPOCH or more than 142 years later than that value will produce unexpected results.
 
 A comment preceded by a # sign may be appended to any system parameter statement.
