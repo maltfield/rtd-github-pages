@@ -7,14 +7,17 @@
 Changes commited will trigger automatic Action to build and deploy into the gh-pages branch.
 
 Published [here](https://gsf600y.github.io/rtd-github-pages/)
+
 .  
 .  
 .  
 .  
 Original README.md follows.....
-. 
-. 
-.    
+.  
+.  
+.  
+.  
+   
 # Continuous Documentation: Hosting Read the Docs on GitHub Pages
 
 This repo is a fork-ready base for your project's documentation. It lets you host a sphinx-generated site (with the Read the Docs theme) on GitHub Pages using GitHub Actions.
