@@ -7,7 +7,7 @@ Configuration File
 Example configuration file
 ==========================
 
-.. dropdown:: hercules.cnf file - click to show/hide
+.. dropdown:: click to see configuration file
 
     ####################################################################
     #                HERCULES EMULATOR CONTROL FILE                    #
