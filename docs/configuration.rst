@@ -169,11 +169,7 @@ The following system parameters may be specified:
 
 ARCHLVL
 -------
-
-
-.. code-block:: none
-   ARCHLVL S/370 | ESA/390 | ESAME | z/Arch
-...
+   ``ARCHLVL S/370 | ESA/390 | ESAME | z/Arch``
 
 Specifies the initial architecture mode.
 
@@ -185,28 +181,32 @@ When ``z/Arch`` or ``ESAME`` is specified, the machine will always IPL in ESA/39
 
 When ``ARCHLVL S/370`` is set, the current ``LPARNUM`` and ``CPUIDFMT`` settings will be automatically changed to ``BASIC``. When ``ARCHLVL z/Arch`` is set, ``LPARNUM`` and ``CPUIDFMT`` will be reset back to ``1`` and ``0`` respectively (if needed). Refer to the *"Limited automatic LPARNUM updating when setting certain architecture modes"* section of the Release Notes document for more information.
 
-The `ARCHLVL` statement used to be called `ARCHMODE` in previous versions of Hercules but the use of `ARCHMODE` has been deprecated in favor of the new `ARCHLVL` statement. Existing `ARCHMODE` statements should be changed to `ARCHLVL` instead. For the time being however, `ARCHMODE` is still accepted and is treated as simply a synonym for the `ARCHLVL` statement.
+The ``ARCHLVL`` statement used to be called ``ARCHMODE`` in previous versions of Hercules but the use of ``ARCHMODE`` has been deprecated in favor of the new ``ARCHLVL`` statement. Existing ``ARCHMODE`` statements should be changed to ``ARCHLVL`` instead. For the time being however, ``ARCHMODE`` is still accepted and is treated as simply a synonym for the ``ARCHLVL`` statement.
+
 
 ASN_AND_LX_REUSE
 ----------------
-ASN_AND_LX_REUSE   ENABLE | DISABLE       (deprecated; use FACILITY)
+   ``ASN_AND_LX_REUSE   ENABLE | DISABLE`` (deprecated; use ``FACILITY``)
+
 
 AUTOINIT
 --------
-AUTOINIT   ON | OFF
+   ``AUTOINIT   ON | OFF``
 The `AUTOINIT` option controls whether device files for emulated tape volumes should be automatically created or not.
 
-When `AUTOINIT` is `ON`, a `devinit` command specifying a file that does not yet exist causes the tape driver to automatically create an empty unlabeled tape volume consisting of just two tapemarks when it discovers the specified file does not exist yet. When `AUTOINIT` is `OFF` a `devinit` command instead fails with an expected "file not found" error. For convenience the default setting is `ON`.
+When ``AUTOINIT`` is ``ON``, a ``devinit`` command specifying a file that does not yet exist causes the tape driver to automatically create an empty unlabeled tape volume consisting of just two tapemarks when it discovers the specified file does not exist yet. When ``AUTOINIT`` is ``OFF`` a ``devinit`` command instead fails with an expected "file not found" error. For convenience the default setting is ``ON``.
+
 
 AUTOMOUNT   [±]directory
 --------
-Specifies the host system directory where the guest is allowed or not allowed to automatically load virtual tape volumes from. Prefix allowable directories with a `+` plus sign and unallowable directories with a `-` minus sign. The default prefix if neither is specified is the '+' plus sign (i.e. an allowable directory).
+   ``AUTOMOUNT   [±]directory``
+Specifies the host system directory where the guest is allowed or not allowed to automatically load virtual tape volumes from. Prefix allowable directories with a ``+`` plus sign and unallowable directories with a ``-`` minus sign. The default prefix if neither is specified is the ``+`` plus sign (i.e. an allowable directory).
 
 .. caution:: Enabling this feature may have security consequences depending on which allowable host system directories you specify as well as how your guest operating system enforces authorized use of the Set Diagnose (X'4B') channel command code.
 
 All host system virtual tape volumes to be "automounted" by the guest must reside within one of the specified allowable host system directories or any of its subdirectories while not also being within any of the specified unallowable directories or any of their subdirectories, in order for the guest-invoked automount to be accepted.
 
-.. note:: Specifying a disallowed automount directory does not preclude the Hercules operator from manually mounting any desired file via the devinit panel command -- even one in a currently defined "disallowed" automount directory. The `AUTOMOUNT` statement only controls guest-invoked automatic tape mounts and not manual tape mounts performed by the Hercules operator.
+.. note:: Specifying a disallowed automount directory does not preclude the Hercules operator from manually mounting any desired file via the ``devinit`` panel command -- even one in a currently defined "disallowed" automount directory. The `AUTOMOUNT` statement only controls guest-invoked automatic tape mounts and not manual tape mounts performed by the Hercules operator.
 
 All directories must be specified on separate statements, but as many statements as needed may be specified in order to describe the desired allowable/unallowable directories layout. For convenience, an automount panel command is also provided to dynamically add/remove new/existing allowable/unallowable automount directories at any time.
 
@@ -214,28 +214,28 @@ The automount feature is activated whenever you specify at least one allowable o
 
 All specified directories are always resolved to fully-qualified absolute directory paths before being saved.
 
-Refer to the description of the virtual tape device `noautomount` option for more information.
+Refer to the description of the virtual tape device ``noautomount`` option for more information.
 
 
 CCKD
 ----
-Syntax: `CCKD`   *`cckd-parameters`*
+Syntax: ``CCKD cckd-parameters``
 
 The CCKD command and initialization statement can be used to affect cckd processing. The CCKD initialization statement is specified as a Hercules configuration file statement and supports the same options as the cckd panel command. Refer to the Compressed Dasd Emulation web page for more information.
 
 
 CMDSEP
 ------
-CMDSEP   OFF | c
+   ``CMDSEP   OFF | c``
 
-A command line separator character allows multiple commands to be entered on a single line. The character 'c' defines the command separator character. The values '.' (period or dot), '!' (exclamation mark or bang) and '-' (dash or hypen) are reserved and cannot be used. The default value is 'OFF' indicating command separation is disabled.
+A command line separator character allows multiple commands to be entered on a single line. The character ``c`` defines the command separator character. The values '.' (period or dot), '!' (exclamation mark or bang) and '-' (dash or hypen) are reserved and cannot be used. The default value is 'OFF' indicating command separation is disabled.
 
-.. warning:: Choose your separator character carefully. Setting it to an alphabetic value for example disables all commands containing that character. Setting it to 'e' for example will disable the 'exit' command making it impossible to exit the emulator. Similarly, setting it to 'o' or 'f' will make it impossible to disable command separation once enabled, and setting it to '#' (hash) will prevent lines with comments from being processed correctly.
+.. warning:: Choose your separator character carefully. Setting it to an alphabetic value for example disables all commands containing that character. Setting it to ``e`` for example will disable the ``exit`` command making it impossible to exit the emulator. Similarly, setting it to ``o`` or ``f`` will make it impossible to disable command separation once enabled, and setting it to ``#`` (hash) will prevent lines with comments from being processed correctly.
 
 
 CMPSCPAD
 --------
-CMPSCPAD   alignment
+   ``CMPSCPAD   alignment``
 The CMPSCPAD command and initialization statement is used to define the zero padding storage alignment boundary for the CMPSC-Enhancement Facility. It must be a power of 2 value ranging anywhere from 1 to 12.
 
 
