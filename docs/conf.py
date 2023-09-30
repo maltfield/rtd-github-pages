@@ -248,7 +248,7 @@ rinoh_documents = [(
  master_doc,
  'target',
  project+ ' Documentation',
- '© ' +,
+ '© ' +copyright,
 )]
 today_fmt = "%B %d, %Y"
  
