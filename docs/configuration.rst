@@ -7,10 +7,10 @@ Configuration File
 Example configuration file
 ==========================
 
-.. dropdown:: click to see configuration file
+.. code-block:: 
 
-    ####################################################################
-    #                HERCULES EMULATOR CONTROL FILE                    #
+ ####################################################################
+ #                HERCULES EMULATOR CONTROL FILE                    #
     #             (Note: not all parameters are shown)                 #
     ####################################################################
 
