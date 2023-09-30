@@ -1,7 +1,7 @@
 .. _autodoc:
  
-Hercules Version 4: Operation
-=============================================
+Operation
+=========
  
 Overview
 --------------------------
