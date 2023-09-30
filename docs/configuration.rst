@@ -1,26 +1,27 @@
 .. _autodoc:
- 
+
+##################
 Configuration File
-======================================
+##################
  
 .. automodule:: helloWorld
   :members:
   :undoc-members:
  
 Example configuration file
---------------------------
+==========================
 
 Comment lines
--------------
+=============
 Blank lines, and lines beginning with a # sign or an asterisk, are treated as comments.
 
 System parameters
------------------
+=================
 Except for the ARCHLVL and LPARNUM statements, system parameter statements may appear in any order but must precede any device statements. Each system parameter must be on a separate line.
 The following system parameters may be specified:
 
 ARCHLVL
-+++++++
+-------
 
 
 .. code-block:: none
@@ -40,18 +41,18 @@ When ``ARCHLVL S/370`` is set, the current ``LPARNUM`` and ``CPUIDFMT`` settings
 The `ARCHLVL` statement used to be called `ARCHMODE` in previous versions of Hercules but the use of `ARCHMODE` has been deprecated in favor of the new `ARCHLVL` statement. Existing `ARCHMODE` statements should be changed to `ARCHLVL` instead. For the time being however, `ARCHMODE` is still accepted and is treated as simply a synonym for the `ARCHLVL` statement.
 
 ASN_AND_LX_REUSE
-++++++++++++++++
+----------------
 ASN_AND_LX_REUSE   ENABLE | DISABLE       (deprecated; use FACILITY)
 
 AUTOINIT
-++++++++
+--------
 AUTOINIT   ON | OFF
 The `AUTOINIT` option controls whether device files for emulated tape volumes should be automatically created or not.
 
 When `AUTOINIT` is `ON`, a `devinit` command specifying a file that does not yet exist causes the tape driver to automatically create an empty unlabeled tape volume consisting of just two tapemarks when it discovers the specified file does not exist yet. When `AUTOINIT` is `OFF` a `devinit` command instead fails with an expected "file not found" error. For convenience the default setting is `ON`.
 
 AUTOMOUNT   [±]directory
-+++++++
+--------
 Specifies the host system directory where the guest is allowed or not allowed to automatically load virtual tape volumes from. Prefix allowable directories with a `+` plus sign and unallowable directories with a `-` minus sign. The default prefix if neither is specified is the '+' plus sign (i.e. an allowable directory).
 
 Caution:  Enabling this feature may have security consequences depending on which allowable host system directories you specify as well as how your guest operating system enforces authorized use of the Set Diagnose (X'4B') channel command code.
@@ -70,27 +71,29 @@ Refer to the description of the virtual tape device `noautomount` option for mor
 
 
 CCKD
-++++
+----
 Syntax: `CCKD`   *`cckd-parameters`*
 
 The CCKD command and initialization statement can be used to affect cckd processing. The CCKD initialization statement is specified as a Hercules configuration file statement and supports the same options as the cckd panel command. Refer to the Compressed Dasd Emulation web page for more information.
 
 
 CMDSEP
-++++++++++++++++
+------
 CMDSEP   OFF | c
 
 A command line separator character allows multiple commands to be entered on a single line. The character 'c' defines the command separator character. The values '.' (period or dot), '!' (exclamation mark or bang) and '-' (dash or hypen) are reserved and cannot be used. The default value is 'OFF' indicating command separation is disabled.
 
 Warning: choose your separator character carefully. Setting it to an alphabetic value for example disables all commands containing that character. Setting it to 'e' for example will disable the 'exit' command making it impossible to exit the emulator. Similarly, setting it to 'o' or 'f' will make it impossible to disable command separation once enabled, and setting it to '#' (hash) will prevent lines with comments from being processed correctly.
 
+
 CMPSCPAD
-++++++++
+--------
 CMPSCPAD   alignment
 The CMPSCPAD command and initialization statement is used to define the zero padding storage alignment boundary for the CMPSC-Enhancement Facility. It must be a power of 2 value ranging anywhere from 1 to 12.
 
+
 CNSLPORT
-++++++++
+--------
 CNSLPORT   3270  -or-  nnnn  -or-  host:port
 Specifies (typically) the port number (in decimal) to which tn3270 and telnet clients should connect. If an invalid value is specified Hercules defaults to port number 3270. See also the SYSGPORT statement.
 
@@ -98,8 +101,9 @@ The CNSLPORT statement may also be specified as host:port, where host identifies
 
 See the Telnet/tn3270 Console How-To for additional information about setting up a telnet or tn3270 client.
 
+
 CODEPAGE
-++++++++
+--------
 CODEPAGE   mapping
 Specifies the codepage conversion mapping table used for ASCII/EBCDIC translation.
 
@@ -191,8 +195,9 @@ _	    underscore
 ×	    multiplication sign
 ÷	    obelus/divide sign
 
+
 CONKPALV
-++++++++
+--------
 CONKPALV   (idle,intv,count)
 Specifies the tn3270 console and telnet clients keepalive option values that control automatic detection of disconnected tn3270/telnet client sessions.
 
@@ -210,13 +215,15 @@ The three values can also be modified on-demand via the conkpalv panel command, 
 
 Please also note that not all systems support being able to modify all three values. That is, not all values may be modifiable. It is operating system dependent which values you can change and which values you cannot. On Windows for example, the count value is ignored and cannot be changed from its default value of 10. Other systems may ignore one or more or all three values and use platform defaults instead. This is entirely system dependent. Check your system's documentation for details regarding which values can be changed and which cannot as well as how to adjust your system's default values.
 
+
 CPUIDFMT
-++++++++
+--------
 CPUIDFMT   0 | 1 | BASIC
 Specifies the format of the CPU ID the STIDP instruction should store. Refer to the LPARNUM statement for more information.
 
+
 CPUMODEL
-++++++++
+--------
 CPUMODEL   0586 | xxxx | $(symbol)
 Specifies the 4 hexadecimal digit CPU machine type number (known prior to ESA/390 as the model number) stored by the STIDP instruction.
 
@@ -235,13 +242,15 @@ z15T02	8562
 z16	3931
 Note: Hercules makes no attempt to emulate all aspects of, or features of, a given CPU model. The CPUMODEL statement defines a purely cosmetic value only. It defines only the value that the STIDP (Store CPU ID) instruction stores, and nothing more.
 
+
 CPUSERIAL
-+++++++++
+---------
 CPUSERIAL   000001 | xxxxxx
 Specifies the 6 hexadecimal digit CPU serial number stored by the STIDP instruction. In BASIC mode, the high-order digit may be replaced with the processor number when MAXCPU > 1; in LPAR mode, the two high-order digits are replaced with either the LPAR number or the CPU number and LPAR number with the full serial number available via the STSI instruction. The default serial number is 000001.
 
+
 CPUVERID
-++++++++
+--------
 CPUVERID   FD | xx   [FORCE]
 Specifies the 2 hexadecimal digit CPU version code stored by the STIDP instruction.
 
@@ -251,7 +260,7 @@ If you try using the cpuverid command/statement to set a non-zero cpuverid value
 
 
 DEFSYM
-++++++
+------
 DEFSYM   symbol value
 Defines symbol symbol as to contain value value. The symbol can then be the object of a substitution later in the configuration file or for panel commands. If value contains blanks or spaces, then it should be enclosed in double quotation marks ("). See substitutions for a more in-depth discussion on this feature.
 
@@ -262,7 +271,7 @@ Will set symbol FOO to ""
 
 
 DEVTMAX
-+++++++
+-------
 DEVTMAX   -1 | 0 | nnn
 Specifies the maximum number of device threads allowed.
 
@@ -276,7 +285,7 @@ The default for Windows is 8. The default for all other systems is 0.
 
 
 DIAG8CMD
-++++++++
+--------
 DIAG8CMD   DISABLE | ENABLE   [ECHO | NOECHO]
 When ENABLE is specified the Hercules Diagnose 8 instruction command interface is enabled, allowing the guest to directly issue Hercules commands via the Diagnose 8 instruction. When set to DISABLE all Diagnose 8 instructions cause a Specification Exception program interrupt to occur instead.
 
