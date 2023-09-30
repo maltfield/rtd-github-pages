@@ -12,6 +12,7 @@ Welcome to the Hercules Documentation Test site!
 
    installation
    configuration
+   operation
 
 
 Indices and tables
