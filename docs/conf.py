@@ -21,7 +21,7 @@
 
 project = 'Hercules Documentation Test'
 copyright = '2023'
-author = 'Test Author (this text is in conf.py)'
+author = 'Test Author'
 
 # The short X.Y version
 version = ''
@@ -133,7 +133,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'helloWorld.tex', 'helloWorld Documentation',
+    (master_doc, 'helloWorld.tex', 'Hercules Documentation Test',
      'Michael Altfield', 'manual'),
 ]
 
