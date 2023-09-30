@@ -1,12 +1,20 @@
 .. _autodoc:
  
-Hercules Version 4: Installation Instructions
+Installation Instructions
 =============================================
  
 Overview
 --------------------------
 Overview section goes here.
   
-Other information
+Linux installation
+-----------------
+etc etc etc etc 
+
+Windows installation
+-----------------
+etc etc etc etc 
+
+Other platforms
 -----------------
 etc etc etc etc 
