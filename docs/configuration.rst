@@ -1,6 +1,6 @@
 .. _autodoc:
  
-Hercules Version 4: Configuration File
+Configuration File
 ======================================
  
 .. automodule:: helloWorld
