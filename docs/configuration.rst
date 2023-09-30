@@ -4,12 +4,159 @@
 Configuration File
 ##################
  
-.. automodule:: helloWorld
-  :members:
-  :undoc-members:
- 
 Example configuration file
 ==========================
+
+.. dropdown:: hercules.cnf file - click to show/hide
+
+    ####################################################################
+    #                HERCULES EMULATOR CONTROL FILE                    #
+    #             (Note: not all parameters are shown)                 #
+    ####################################################################
+
+
+    #------------------------------------------------------------------
+    #                       SYSTEM PARAMETERS
+    #------------------------------------------------------------------
+
+    ##HERCPRIO   0                                        (deprecated; unsupported)
+    ##TODPRIO    -20                                      (deprecated; unsupported)
+    ##DEVPRIO    8                                        (deprecated; unsupported)
+    ##CPUPRIO    0                                        (deprecated; unsupported)
+
+    ##ARCHMODE   ESA/390                                  (deprecated; use ARCHLVL)
+    ##ASN_AND_LX_REUSE  disable                           (deprecated; use FACILITY)
+
+    ##PANRATE    FAST                                     (deprecated; use PANOPT)
+    ##PANTITLE   "My own private MAINFRAME!"              (deprecated; use PANOPT)
+
+    ARCHLVL    ESA/390
+    FACILITY   ENABLE 044_PFPO
+
+    PGMPRDOS   restricted
+    ECPSVM     no  notrap
+
+    OSTAILOR   OS/390
+    LOADPARM   0120....
+
+    CPUSERIAL  000611
+    CPUMODEL   3090
+    CPUVERID   FD
+    LPARNAME   HERCULES
+    LPARNUM    01
+    CPUIDFMT   1
+    MODEL      EMULATOR
+    PLANT      ZZ
+    MANUFACTURER HRC
+
+    MAINSIZE   1G
+    XPNDSIZE   0
+    NUMCPU     4
+    MAXCPU     8
+    ENGINES    CP,CP,AP,IP
+
+    SYSEPOCH   1900
+    YROFFSET   -28
+    TZOFFSET   -0500
+
+    HTTP       PORT   8081  NOAUTH
+    HTTP       ROOT   /usr/local/share/hercules/
+    HTTP       START
+
+    MODPATH    /usr/local/hercules
+    LDMOD      dyncrypt
+    NETDEV     /dev/net/tun
+
+    CCKD       NOSFD=1
+    SHRDPORT   3990
+
+    PANOPT     NAMEONLY RATE=FAST MSGCOLOR=DARK "TITLE=My own private MAINFRAME!"
+    LOGOPT     TIMESTAMP NODATESTAMP
+
+    CODEPAGE   819/1047
+    CNSLPORT   3270
+    SYSGPORT   3278
+    CONKPALV   (3,1,10)
+    LEGACYSENSEID   OFF
+
+    TIMERINT   DEFAULT
+    TODDRAG    1.0
+    DEVTMAX    8
+
+    SHCMDOPT   disable  nodiag8
+    DIAG8CMD   disable  noecho
+    CMDSEP     OFF
+
+    DEFSYM     TAPEDIR   "$(HOME)/tapes"
+    AUTOMOUNT  $(TAPEDIR)
+    AUTOMOUNT  +/tapes
+    AUTOMOUNT  -/tapes/vault
+
+    MOUNTED_TAPE_REINIT  allow
+    AUTOINIT   on
+    SCSIMOUNT  no
+
+    INCLUDE    mydevs.cfg
+    IGNORE     INCLUDE_ERRORS
+    INCLUDE    optdevs.cfg
+
+
+    #------------------------------------------------------------------
+    #                     DEVICE STATEMENTS
+    #             (see supported device types table)
+    #------------------------------------------------------------------
+
+    0009      3215-C  /
+
+    000A      1442    adrdmprs.rdr
+    000C      3505    jcl.txt     ascii  trunc
+    000D      3525    pch00d.txt  ascii
+    000E      1403    prt00e.txt  append       cctape=legacy
+    001E      3211    192.168.200.1:1403 sockdev  fcb=legacy
+
+    001F      3270    * 192.168.0.1
+    0200.4    3270    * 192.168.0.0  255.255.255.0
+    0220.8    3270    GROUP1  192.168.100.0  255.255.255.0
+    0228.8    3270    GROUP2
+    0230.16   3270
+
+    0000      SYSG    SYSGCONS
+
+    0100      3390    disks/linux.dsk  sf=shadows/linux_*.dsk  ser=000000000001
+
+    0120      3380    ${DASD_PATH=dasd/}mvsv5r.120
+    0121      3380    ${DASD_PATH=dasd/}mvsv5d.121
+    0122      3380    ${DASD_PATH=dasd/}mvswk1.122
+    0123      3380    192.168.1.100
+
+    0140      3370    dosres.140
+    0141      3370    syswk1.141
+    0300      3370    sysres.300
+
+    0A00.3    QETH    chpid F0  iface /dev/net/tun  ipaddr 192.168.0.4  netmask 255.255.0.0
+    0440.2    LCS     -n   /dev/net/tun   192.168.200.2
+    0420.2    CTCI    192.168.200.1  192.168.200.2
+    0430.2    CTCI    tun0
+    #0E40      LCS     -e SNA  tap0
+    0E40      CTCE    31880  192.168.1.202  32880
+    0E41      CTCE    31882  192.168.1.202  32882
+
+    0E42.2    CTCE         1=192.168.1.202
+    0460.2    PTP     192.168.200.1  192.168.200.2/24
+    0470.2    PTP     tun0
+
+    0580      3420    ickdsf.aws  noautomount
+    0581      3420    /cdrom/tapes/uaa196.tdf
+    0582-0587 3420    $(TAPEDIR)/volumes.$(CUU) maxsizeM=170 eotmargin=131072
+
+    0590      3590    \\.\Tape0   # SCSI  (Windows only)
+    0591      3590    /dev/nst0   # SCSI  (Linux or Windows)
+    0592      3490    /dev/nst1 --no-erg --blkid-32   # Quantum DLT SCSI
+
+    0020      2703    lport=32003 dial=IN lnctl=tele2 uctrans=yes term=tty skip=88C9DF iskip=0A
+    0023      2703    lport=3780 rhost=localhost rport=3781 dial=no
+    0045      2703    lport=32003 dial=IN lnctl=ibm1 term=2741 skip=5EDE code=ebcd
+
 
 Comment lines
 =============
