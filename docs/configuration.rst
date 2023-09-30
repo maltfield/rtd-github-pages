@@ -55,11 +55,11 @@ AUTOMOUNT   [±]directory
 --------
 Specifies the host system directory where the guest is allowed or not allowed to automatically load virtual tape volumes from. Prefix allowable directories with a `+` plus sign and unallowable directories with a `-` minus sign. The default prefix if neither is specified is the '+' plus sign (i.e. an allowable directory).
 
-Caution:  Enabling this feature may have security consequences depending on which allowable host system directories you specify as well as how your guest operating system enforces authorized use of the Set Diagnose (X'4B') channel command code.
+.. caution:: Enabling this feature may have security consequences depending on which allowable host system directories you specify as well as how your guest operating system enforces authorized use of the Set Diagnose (X'4B') channel command code.
 
 All host system virtual tape volumes to be "automounted" by the guest must reside within one of the specified allowable host system directories or any of its subdirectories while not also being within any of the specified unallowable directories or any of their subdirectories, in order for the guest-invoked automount to be accepted.
 
-**Note:** specifying a disallowed automount directory does not preclude the Hercules operator from manually mounting any desired file via the devinit panel command -- even one in a currently defined "disallowed" automount directory. The `AUTOMOUNT` statement only controls guest-invoked automatic tape mounts and not manual tape mounts performed by the Hercules operator.
+.. note:: Specifying a disallowed automount directory does not preclude the Hercules operator from manually mounting any desired file via the devinit panel command -- even one in a currently defined "disallowed" automount directory. The `AUTOMOUNT` statement only controls guest-invoked automatic tape mounts and not manual tape mounts performed by the Hercules operator.
 
 All directories must be specified on separate statements, but as many statements as needed may be specified in order to describe the desired allowable/unallowable directories layout. For convenience, an automount panel command is also provided to dynamically add/remove new/existing allowable/unallowable automount directories at any time.
 
@@ -83,7 +83,7 @@ CMDSEP   OFF | c
 
 A command line separator character allows multiple commands to be entered on a single line. The character 'c' defines the command separator character. The values '.' (period or dot), '!' (exclamation mark or bang) and '-' (dash or hypen) are reserved and cannot be used. The default value is 'OFF' indicating command separation is disabled.
 
-Warning: choose your separator character carefully. Setting it to an alphabetic value for example disables all commands containing that character. Setting it to 'e' for example will disable the 'exit' command making it impossible to exit the emulator. Similarly, setting it to 'o' or 'f' will make it impossible to disable command separation once enabled, and setting it to '#' (hash) will prevent lines with comments from being processed correctly.
+.. warning:: Choose your separator character carefully. Setting it to an alphabetic value for example disables all commands containing that character. Setting it to 'e' for example will disable the 'exit' command making it impossible to exit the emulator. Similarly, setting it to 'o' or 'f' will make it impossible to disable command separation once enabled, and setting it to '#' (hash) will prevent lines with comments from being processed correctly.
 
 
 CMPSCPAD
@@ -397,7 +397,7 @@ IODELAY
 IODELAY   usec
 Specifies the amount of time (in microseconds) to wait after an I/O interrupt is ready to be set pending. This value can also be set using the Hercules console. The purpose of this parameter is to bypass a bug in the Linux/390 and zLinux dasd.c device driver. The problem is more apt to happen under Hercules than on a real machine because we may present an I/O interrupt sooner than a real machine.
 
-NOTE: OSTAILOR LINUX no longer sets IODELAY to 800 since the problem described above is no longer present in recent versions of the Linux kernel.
+.. note:: OSTAILOR LINUX no longer sets IODELAY to 800 since the problem described above is no longer present in recent versions of the Linux kernel.
 
 
 LDMOD
@@ -468,7 +468,7 @@ The minimum size is 4K for S/370 and ESA/390, and 8K for z/Arch. A maximum of 64
 Notes:
 
 The actual upper limit is determined by your host system's architecture and operating system, the guest operating system, and the amount of physical memory and available paging space. The total of mainsize and xpndsize on host systems with a 32-bit architecture will be limited to less than 4G; host systems with a 64-bit architecture will be limited to less than 16E.
-Caution: using minimum storage sizes, storage sizes less than 64K or a size that is not a multiple of 64K for S/370, or a size less than 1M or is not a multiple of 1M for z/Arch is not recommended as it could generate error conditions which are not covered by the Principles of Operations.
+.. caution:: Using minimum storage sizes, storage sizes less than 64K or a size that is not a multiple of 64K for S/370, or a size less than 1M or is not a multiple of 1M for z/Arch is not recommended as it could generate error conditions which are not covered by the Principles of Operations.
 Use of storage sizes greater than supported by the guest operating system may generate incorrect results or error conditions within the guest operating system.
 
 
@@ -531,7 +531,7 @@ The default for Windows is whichever host adapter that SoftDevLab's CTCI-WIN pro
 
 Refer to the 'Help' file included in newer versions of CTCI-WIN (version 3.6.0 or greater) for information regarding modifying Windows's "Adapter Binding Order" and/or defining a preferred CTCI-WIN default host network adapter.
 
-Note: Hercules's networking support requires privileged access to your host's networking devices. If Hercules is not started with Administrative (root) privileges then initialization of your networking devices will fail and your guest's networking will not work.
+.. note:: Hercules's networking support requires privileged access to your host's networking devices. If Hercules is not started with Administrative (root) privileges then initialization of your networking devices will fail and your guest's networking will not work.
 
 
 NUMCPU
@@ -547,7 +547,7 @@ OSTAILOR
 OSTAILOR   DEFAULT | OS/390 | z/OS | VM | z/VM | VSE | z/VSE | LINUX | OpenSolaris | QUIET | NULL
 Specifies the intended operating system. The effect of this parameter is to reduce control panel message traffic by selectively suppressing trace messages for program checks which are considered normal in the specified environment. QUIET suppresses all exception messages. NULL displays all exception messages.
 
-Note! Neither QUIET nor NULL should ever be used in normal circumstances! QUIET hides what otherwise might be important messages needed to diagnose incorrect Hercules and/or guest functionality. Only use QUIET under the guidance of Hercules product support personnel. Instead, please specify an OSTAILOR value that is appropriate for the guest operating system you intend to run under Hercules, or else let it default by not specifying it at all.
+.. note:: Neither QUIET nor NULL should ever be used in normal circumstances! QUIET hides what otherwise might be important messages needed to diagnose incorrect Hercules and/or guest functionality. Only use QUIET under the guidance of Hercules product support personnel. Instead, please specify an OSTAILOR value that is appropriate for the guest operating system you intend to run under Hercules, or else let it default by not specifying it at all.
 
 If no OSTAILOR statement is specified at all, then DEFAULT is used, which suppresses only program check messages for interruption codes 10 (segment-translation exception), 11 (page-translation exception), 16 (trace-table exception) and 1C (space-switch event), which are considered to be completely normal and unremarkable for virtually all known mainframe operating systems.
 
@@ -573,7 +573,7 @@ TITLE=xxx defines an optional console window title-bar string to be used in plac
 
 The TITLE= option takes effect only when the Hercules console is displayed on either an xterm terminal (commonly used on Unix systems) or in a Command Prompt window on Windows systems.
 
-Note: neither the MSGCOLOR= nor the TITLE= option has any effect when Hercules is run under the control of an external GUI since since Hercules's console window is hidden in favor of using the external GUI's window instead (and the GUI is in control of its own colors). The RATE= option however, controls how often the external GUI will refresh its own window and other user-interface controls. Similarly, the FULLPATH and NAMEONLY option controls how the external GUI displays your list of emulated devices.
+.. note:: Neither the MSGCOLOR= nor the TITLE= option has any effect when Hercules is run under the control of an external GUI since since Hercules's console window is hidden in favor of using the external GUI's window instead (and the GUI is in control of its own colors). The RATE= option however, controls how often the external GUI will refresh its own window and other user-interface controls. Similarly, the FULLPATH and NAMEONLY option controls how the external GUI displays your list of emulated devices.
 
 
 PANRATE
@@ -592,7 +592,7 @@ PGMPRDOS
 PGMPRDOS   RESTRICTED | LICENSED
 Specifies whether or not Hercules will run licensed program product ESA or z/Architecture operating systems. If RESTRICTED is specified, Hercules will stop all CPUs when a licensed program product operating system is detected. Specify LICENSED to allow these operating systems to run normally. This parameter has no effect on Linux/390, Linux for z/Series, or any 370-mode OS.
 
-NOTE:  It is YOUR responsibility to comply with the terms of the license for the operating system you intend to run on Hercules. If you specify LICENSED and run a licensed operating system in violation of that license, then don't come after the Hercules developers when the vendor sends their lawyers after you!
+.. note:: It is YOUR responsibility to comply with the terms of the license for the operating system you intend to run on Hercules. If you specify LICENSED and run a licensed operating system in violation of that license, then don't come after the Hercules developers when the vendor sends their lawyers after you!
 
 RESTRICTED is the default. Specifying LICENSED will produce a message when a licensed operating system is detected to remind you of your responsibility to comply with software license terms.
 
@@ -614,7 +614,7 @@ A value from 1 to 99 seconds inclusive enables the option and causes periodic qu
 
 The scsimount panel command may also be used to display and/or modify this value on demand once Hercules has been started. Note too that the scsimount panel command also lists any mounts and/or dismounts that may still be pending on the drive, as long as you've defined your tape drive as a model that has an LCD "display" (such as a model 3480, 3490 or 3590).
 
-Note:  enabling this option may cause Hercules to take longer to shutdown depending on the value specified for this option as well as how the host operating system (Windows, Linux, etc) and associated hardware (SCSI adapter) behaves to drive status queries for drives which do not have any media currently mounted on them.
+.. note:: Enabling this option may cause Hercules to take longer to shutdown depending on the value specified for this option as well as how the host operating system (Windows, Linux, etc) and associated hardware (SCSI adapter) behaves to drive status queries for drives which do not have any media currently mounted on them.
 
 
 SHCMDOPT
@@ -663,7 +663,7 @@ The maximum allowed interval is 999999 microseconds (one microsecond less than o
 
 Also note that due to host system limitations and/or design, some hosts may round up and/or coalesce short microsecond intervals to a much longer millisecond interval instead.
 
-CAUTION!  While lower TIMERINT values may help increase the accuracy of your guest's TOD Clock and CPU Timer values, it could also have a severe negative impact on host operating system performance as well. You should exercise extreme caution when choosing your TIMERINT value in relationship to the actual process priority (nice value) of the Hercules process itself.
+.. caution:: While lower TIMERINT values may help increase the accuracy of your guest's TOD Clock and CPU Timer values, it could also have a severe negative impact on host operating system performance as well. You should exercise extreme caution when choosing your TIMERINT value in relationship to the actual process priority (nice value) of the Hercules process itself.
 
 
 TODDRAG
@@ -812,7 +812,7 @@ Meaning
 +8 to +14	 	Below Normal	Process that has priority above the Idle class but below the Normal class.
  	 	 	 
 +15 to +19	 	Idle	Process whose threads run only when the system is idle. The threads of the process are preempted by the threads of any process running in a higher priority class. An example is a screen saver. The idle-priority class is inherited by child processes.
-Caution!  A high process priority (or low 'nice' value) could have a impact on how Hercules's internal thread priorities are interpreted, thereby impacting the overall performance of your host system.
+.. caution::  A high process priority (or low 'nice' value) could have a impact on how Hercules's internal thread priorities are interpreted, thereby impacting the overall performance of your host system.
 
 
 Thread Priorities
@@ -838,7 +838,7 @@ Description
 6	 	(unused)	---
  	 	 	 
 7	 	Timer	TOD Clock and Timer thread is the thread which manages the internal emulated TOD Clock and CPU Timer components of your emulated mainframe. In order to ensure accurate time of day and elapsed time and/or CPU time measurement, it should always be the very highest priority thread within Hercules.
-Caution:  Hercules's internal thread priorities could be interpreted differently based on its process priority (or 'nice' value), thereby impacting the overall performance of your host system.
+.. caution:: Hercules's internal thread priorities could be interpreted differently based on its process priority (or 'nice' value), thereby impacting the overall performance of your host system.
 
 
 Device statements
@@ -1193,7 +1193,7 @@ Specifies the maximum size (in bytes, Kilobytes or Megabytes) that the emulated 
 
 Or, nnns where s is either K - KILO, M - MEGA, G - GIGA, or T - TERA - BYTES
 
-Specifying zero for this parameter means "unlimited" (i.e. there is no limit). Note: "T" is not available on all platforms.
+Specifying zero for this parameter means "unlimited" (i.e. there is no limit).  Note: "T" is not available on all platforms.
 
 EOTMARGIN=n[s]
 Specifies the number of bytes remaining before reaching maxsize at which point the tape device will signal the presence of the "End of Tape" marker (reflector), thus allowing the program to switch to the next tape.
@@ -1334,7 +1334,7 @@ The QETH device is a "grouped" device that requires 3 (three) device addresses (
 You may also optionally use OSA or OSD as the device/emulation type instead of QETH if desired:
 0600.3   OSA   [arguments...]
 0600.3   OSD   [arguments...]
-Note: Hercules's networking support requires privileged access to your host's networking devices. The easiest way to do this on Linux is to enable setuid of hercifc using the --enable-setuid-hercifc configure option. If that's not an option, or you're not running under Linux, using Administrative (root) privileges when running Hercules will work as well.
+.. note:: Hercules's networking support requires privileged access to your host's networking devices. The easiest way to do this on Linux is to enable setuid of hercifc using the --enable-setuid-hercifc configure option. If that's not an option, or you're not running under Linux, using Administrative (root) privileges when running Hercules will work as well.
 
 Please note that this is still considered to be an experimental driver still under development. Not all of the features or functionality that real OSA devices have are currently supported. For example, the current implementation only supports three devices: the read device, the write device and the datapath device. Real OSA devices support multiple datapath devices. Support for this feature is planned, but is not yet implemented.
 
@@ -1371,7 +1371,7 @@ Specifies the MAC address to be assigned to your OSA card.
 
 If not specified then one will be internally generated in the range 02:00:5E:80:00:00 - 02:00:5E:FF:FF:FF using the low order 23 bits of the IPv4 address. For example, if the ipv4 address is 10.1.2.3 the generated MAC address will be 02:00:5E:81:02:03.
 
-Note: The MAC address you specify for this option MUST have the 02 locally assigned MAC bit on in the first byte, must NOT have the 01 broadcast bit on in the first byte, and MUST be unique as seen by all other devices on your network segment. It should never, for example, be the same as the host adapter MAC address specified on the iface parameter.
+.. note:: The MAC address you specify for this option MUST have the 02 locally assigned MAC bit on in the first byte, must NOT have the 01 broadcast bit on in the first byte, and MUST be unique as seen by all other devices on your network segment. It should never, for example, be the same as the host adapter MAC address specified on the iface parameter.
 
 mtu  bytes
 Specifies the Maximum Transmission Unit to be used. The maximum transmission unit (MTU) is the largest packet size, measured in bytes, that can be transmitted over a network.
@@ -1398,7 +1398,7 @@ Beginning with SDL Hyperion version 4.4, an LCS device is now also capable of pr
 Except when defined as an SNA device, the LCS device is a "grouped" device that requires 2 (two) device addresses (device numbers) to be defined per LCS group, with the first device of the group being an even numbered device:
 
 0E20.2   LCS  [arguments]
-Note: Hercules's networking support requires privileged access to your host's networking devices. If Hercules is not started with Administrative (root) privileges then initialization of your networking devices will fail and your guest's networking will not work.
+.. note:: Hercules's networking support requires privileged access to your host's networking devices. If Hercules is not started with Administrative (root) privileges then initialization of your networking devices will fail and your guest's networking will not work.
 
 Rather than a point-to-point link, this emulation creates a virtual ethernet adapter through which the guest operating system running in the Hercules machine can communicate. As such, this mode is not limited to TCP/IP traffic, but in fact will handle any ethernet frame.
 
@@ -1426,9 +1426,9 @@ Two device addresses will be defined (devnum and devnum + 1).
 -m MAC Address    or   --mac MAC address
 where 'MAC address' is the optional hardware address for your guest's virtual adapter/interface in the format: hh:hh:hh:hh:hh:hh. The default value is '02:00:5E:nn:nn:nn' where the :nn:nn:nn portion is constructed from the last 3 octets of the specified guestip.
 
-Note: The MAC address you specify for this option MUST have the 02 locally assigned MAC bit on in the first byte, must NOT have the 01 broadcast bit on in the first byte, and MUST be unique as seen by all other devices on your network segment. It should never, for example, be the same as the host adapter MAC address specified on the -n parameter.
+.. note:: The MAC address you specify for this option MUST have the 02 locally assigned MAC bit on in the first byte, must NOT have the 01 broadcast bit on in the first byte, and MUST be unique as seen by all other devices on your network segment. It should never, for example, be the same as the host adapter MAC address specified on the -n parameter.
 
-Note: If you use the --oat option, do not specify an address here. Instead, specify your desired guest adapter MAC address in your OAT file via the HWADD statement.
+.. note:: If you use the --oat option, do not specify an address here. Instead, specify your desired guest adapter MAC address in your OAT file via the HWADD statement.
 
 guestip
 is an optional IP address of the Hercules (guest OS) side. Note: This is only used to establish a point-to-point routing table entry on driving system. If you use the --oat option, do not specify an address here.
@@ -1456,7 +1456,7 @@ Dev
 is the base device address
 Mode
 is the operation mode: IP or SNA.
-Note:  the SNA operation mode is currently not implemented via the OAT file. Rather, a separate LCS device with the -e SNA device option must be specified instead. Refer to the README.SNA document for details.
+.. note:: the SNA operation mode is currently not implemented via the OAT file. Rather, a separate LCS device with the -e SNA device option must be specified instead. Refer to the README.SNA document for details.
 
 Port
 is the virtual (relative) adapter number (i.e. port number).
@@ -1479,7 +1479,7 @@ Additionally, a HWADD and/or ROUTE statement may also be included in the OAT:
 HWADD  pp  hh:hh:hh:hh:hh:hh
 Use the HWADD to specify a hardware (MAC) address for a virtual adapter (port). The first parameter after HWADD specifies the relative adapter (port) to which the address is applied.
 
-Note: The MAC address you specify for this option MUST have the 02 locally assigned MAC bit on in the first byte, must NOT have the 01 broadcast bit on in the first byte, and MUST be unique as seen by all other devices on your network segment. It should never, for example, be the same as the host adapter MAC address specified on the -n parameter, nor the same as the HWADD defined for any other port.
+.. note:: The MAC address you specify for this option MUST have the 02 locally assigned MAC bit on in the first byte, must NOT have the 01 broadcast bit on in the first byte, and MUST be unique as seen by all other devices on your network segment. It should never, for example, be the same as the host adapter MAC address specified on the -n parameter, nor the same as the HWADD defined for any other port.
 
 ROUTE  pp  nnn.nnn.nnn.nnn  ...
 The ROUTE statement is included for convenience. This requests Hercules's network configuration logic (hercifc utility on Linux or CTCI-WIN on Windows) to automatically create a network route for this specified virtual adapter. Please note that it is not necessary to include point-to-point routes for each IP address in the table since this is done automatically by the Hercules device driver's emulation module.
@@ -1492,7 +1492,7 @@ A point-to-point IP connection with the TCP/IP stack of the driving system on wh
 The CTCI device is a "grouped" device that requires 2 (two) device addresses (device numbers) to be defined per CTCI group, with the first device of the group being an even numbered device:
 
 0E20.2   CTCI  [arguments]
-Note: Hercules's networking support requires privileged access to your host's networking devices. If Hercules is not started with Administrative (root) privileges then initialization of your networking devices will fail and your guest's networking will not work.
+.. note:: Hercules's networking support requires privileged access to your host's networking devices. If Hercules is not started with Administrative (root) privileges then initialization of your networking devices will fail and your guest's networking will not work.
 
 The Windows implementation is different from the unix one. See SoftDevLab's CTCI-WIN page for further details and information.
 
@@ -1517,7 +1517,7 @@ If these arguments are specified, they must precede the required arguments.
 -m MAC address    or   --mac MAC address
 where 'MAC address' is the optional hardware address for your guest's virtual adapter/interface in the format: hh:hh:hh:hh:hh:hh. The default value is '02:00:5E:nn:nn:nn' where the :nn:nn:nn portion is constructed from the last 3 octets of the specified guestip.
 
-Note: The MAC address you specify for this option MUST have the 02 locally assigned MAC bit on in the first byte, must NOT have the 01 broadcast bit on in the first byte, and MUST be unique as seen by all other devices on your network segment. It should never, for example, be the same as the host adapter MAC address specified on the -n parameter.
+.. note:: The MAC address you specify for this option MUST have the 02 locally assigned MAC bit on in the first byte, must NOT have the 01 broadcast bit on in the first byte, and MUST be unique as seen by all other devices on your network segment. It should never, for example, be the same as the host adapter MAC address specified on the -n parameter.
 
 -k  kernel-capture-buffer-size
 -i  tuntap32-i/o-buffer-size
@@ -1545,7 +1545,7 @@ Specifies that debugging output is to be produced on the Hercules control panel.
 CTCE     (Enhanced Channel-to-Channel Emulation via TCP connection (true 3088 CTCA))
 The CTCE device type emulates a true 3088 Channel to Channel Adapter. CTCE devices are emulated via TCP/IP connections between two or more Hercules instances.
 
-Note: Hercules's networking support requires privileged access to your host's networking devices. If Hercules is not started with Administrative (root) privileges then initialization of your networking devices will fail and your guest's networking will not work.
+.. note:: Hercules's networking support requires privileged access to your host's networking devices. If Hercules is not started with Administrative (root) privileges then initialization of your networking devices will fail and your guest's networking will not work.
 
 A Hercules CTCE device requires two even-odd pairs of devices, one for reading and the other for writing. In the previous CTCE version these had to be an even-odd pair of port numbers, whereby only the even port numbers had to be specified in the CTCE configuration. This restriction has now been removed. Any port number > 1024 and < 65534 is allowed. The CTCE configuration specifies the listening port number at the receiving end, the sender side port number is a free randomly chosen one.
 
@@ -1631,7 +1631,7 @@ A point-to-point IP connection with the TCP/IP stack of the host system on which
 The PTP device is a "grouped" device that requires 2 (two) device addresses (device numbers) to be defined per PTP group, with the first device of the group being an even numbered device:
 
 0460.2   PTP  [arguments]
-Note: Hercules's networking support requires privileged access to your host's networking devices. If Hercules is not started with Administrative (root) privileges then initialization of your networking devices will fail and your guest's networking will not work.
+.. note:: Hercules's networking support requires privileged access to your host's networking devices. If Hercules is not started with Administrative (root) privileges then initialization of your networking devices will fail and your guest's networking will not work.
 
 For *nix systems, such as Linux, BSD, and OSX, you may use preconfigured interfaces or you may request Hercules to configure the interface for you. In the first case you must know and supply the name of the interface to use; in the second case the kernel supplies an interface name. See the Hercules TCP/IP page for more details.
 
@@ -1674,7 +1674,7 @@ If these arguments are specified, they must precede the required arguments.
 -m MAC address    or   --mac MAC address
 where 'MAC address' is the optional hardware address for the virtual interface in the format: hh:hh:hh:hh:hh:hh. The default value is '02:00:5E:nn:nn:nn' where the :nn:nn:nn portion is constructed from the last 3 octets of the specified guestip.
 
-Note: The MAC address you specify for this option MUST have the 02 locally assigned MAC bit on in the first byte, must NOT have the 01 broadcast bit on in the first byte, and MUST be unique as seen by all other devices on your network segment. It should never, for example, be the same as the host adapter MAC address specified on the -n parameter.
+.. note:: The MAC address you specify for this option MUST have the 02 locally assigned MAC bit on in the first byte, must NOT have the 01 broadcast bit on in the first byte, and MUST be unique as seen by all other devices on your network segment. It should never, for example, be the same as the host adapter MAC address specified on the -n parameter.
 
 -k  kernel-capture-buffer-size
 -i  tuntap32-i/o-buffer-size
@@ -1705,7 +1705,7 @@ The file consists of a 512-byte device header record followed by fixed length tr
 
 Volumes larger than 2GB (for example, the 3390 model 3) can be supported by spreading the data across more than one file. Each file contains a whole number of cylinders. The first file (which contains cylinders 0-2518 in the case of a 3390) usually has _1 as the last two characters of its name. The ckddasd driver allocates the remaining files by replacing the last character of the file name by the characters 2, 3, etc.
 
-Note:  When CKD DASD images are spread across multiple files, you must specify only the first file name (the file with suffix _1) in the configuration statement.
+.. note::  When CKD DASD images are spread across multiple files, you must specify only the first file name (the file with suffix _1) in the configuration statement.
 
 If your host operating system supports large file sizes (or 64-bit offsets) then volumes larger than 2G can be kept in a single file.
 
