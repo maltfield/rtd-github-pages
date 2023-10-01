@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to the Hercules Documentation Test site!
-======================================
+================================================
 
 .. toctree::
    :maxdepth: 2
@@ -13,6 +13,7 @@ Welcome to the Hercules Documentation Test site!
    installation
    configuration
    operation
+   messages
 
 
 Indices and tables
