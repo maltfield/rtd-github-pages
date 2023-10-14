@@ -44,6 +44,7 @@ The following Githb-Pages-hosted Read the Docs sites have been created by clonin
  * [BusKill Docs](https://docs.buskill.in/buskill-app/en/stable/) ([repo](https://github.com/BusKill/buskill-app/tree/master/docs))
  * [Python Bootcamp for Science](https://vienneae.github.io/rtd-github-pages/en/master/index.html) ([repo](https://github.com/vienneae/rtd-github-pages/tree/master/docs))
  * [Py4Web Docs](https://nicozanf.github.io/py4web-doc/) ([repo](https://github.com/nicozanf/py4web-doc/tree/master/docs))
+ * [Hercules Docs](https://fovea1959.github.io/herc-docs-demo/en/master/index.html) ([repo](https://github.com/fovea1959/herc-docs-demo/))
 
 # Local Iteration
 
